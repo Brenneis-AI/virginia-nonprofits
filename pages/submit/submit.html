@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Submit a Nonprofit to the Directory | Virginia Nonprofits</title>
+  <meta name="description" content="Add a Virginia nonprofit to the directory for free. Submit an organization doing meaningful work in your community — reviewed and listed within 3-5 business days.">
+  <link rel="canonical" href="https://virginianonprofits.org/submit">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Virginia Nonprofits">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:title" content="Submit a Nonprofit to the Directory">
+  <meta property="og:description" content="Add a Virginia nonprofit to the directory for free. Submit an organization doing meaningful work in your community — reviewed and listed within 3-5 business days.">
+  <meta property="og:url" content="https://virginianonprofits.org/submit">
+  <link rel="icon" type="image/png" href="../../assets/favicon.png">
+  <link rel="stylesheet" href="../../global/global.css">
+  <link rel="stylesheet" href="submit.css">
+  <!-- SCHEMA TODO (before go-live): confirm site URL for page URL -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Submit a Nonprofit — Virginia Nonprofits",
+  "description": "Know an organization doing great work in Virginia? Submit it for inclusion in the Virginia Nonprofits directory.",
+  "isPartOf": {
+    "@id": "#website"
+  }
+}
+  </script>
+</head>
+<body>
+
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- ====== Navigation ====== -->
+  <header class="site-nav site-nav--light" role="banner">
+    <div class="container">
+      <a href="../../index.html" aria-label="Virginia Nonprofits — Home">
+        <img src="../../assets/logo-horizontal.png" alt="Virginia Nonprofits" class="nav-logo">
+      </a>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="../../pages/directory/directory.html">Directory</a>
+        <a href="../../pages/about/about.html">About</a>
+        <a href="../../pages/submit/submit.html" class="active">Submit a Nonprofit</a>
+        <a href="../../pages/submit/submit.html" class="btn-primary nav-cta">Join the Directory</a>
+      </nav>
+      <button class="nav-hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main-content">
+
+    <!-- ====== Page Header ====== -->
+    <section class="submit-header">
+      <div class="container">
+        <h1 class="submit-title">Submit a Nonprofit</h1>
+        <p class="submit-subhead">Know an organization doing great work in Virginia? Add them to the directory.</p>
+      </div>
+    </section>
+
+    <!-- ====== Submission Form ====== -->
+    <section class="submit-form-section" aria-label="Submission form">
+      <div class="container">
+        <form class="submit-form" data-netlify="true" method="POST" name="submit-nonprofit" novalidate>
+          <input type="hidden" name="form-name" value="submit-nonprofit">
+
+          <div class="form-group">
+            <label for="org-name" class="form-label">Organization Name <span class="form-required" aria-hidden="true">*</span></label>
+            <input type="text" id="org-name" name="organization-name" class="form-input" placeholder="e.g., Shenandoah Valley Food Bank" required>
+          </div>
+
+          <div class="form-group">
+            <label for="org-website" class="form-label">Website URL</label>
+            <input type="url" id="org-website" name="website-url" class="form-input" placeholder="e.g., https://example.org">
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="org-region" class="form-label">Region <span class="form-required" aria-hidden="true">*</span></label>
+              <select id="org-region" name="region" class="form-select" required>
+                <option value="" disabled selected>Select a region</option>
+                <option value="Shenandoah Valley">Shenandoah Valley</option>
+                <option value="Southwest VA">Southwest VA</option>
+                <option value="Central VA">Central VA</option>
+                <option value="Northern VA">Northern VA</option>
+                <option value="Hampton Roads">Hampton Roads</option>
+                <option value="Southside VA">Southside VA</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="org-cause" class="form-label">Primary Cause Category <span class="form-required" aria-hidden="true">*</span></label>
+              <select id="org-cause" name="cause-category" class="form-select" required>
+                <option value="" disabled selected>Select a cause</option>
+                <option value="Youth & Education">Youth &amp; Education</option>
+                <option value="Food Security">Food Security</option>
+                <option value="Housing">Housing</option>
+                <option value="Arts & Culture">Arts &amp; Culture</option>
+                <option value="Veterans">Veterans</option>
+                <option value="Health & Wellness">Health &amp; Wellness</option>
+                <option value="Environment">Environment</option>
+                <option value="Animal Welfare">Animal Welfare</option>
+                <option value="Faith-Based">Faith-Based</option>
+                <option value="Civic & Community">Civic &amp; Community</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="org-mission" class="form-label">Brief Mission Statement <span class="form-required" aria-hidden="true">*</span></label>
+            <textarea id="org-mission" name="mission-statement" class="form-textarea" placeholder="What does this organization do? Two or three sentences is plenty." maxlength="500" required></textarea>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="submitter-name" class="form-label">Your Name <span class="form-required" aria-hidden="true">*</span></label>
+              <input type="text" id="submitter-name" name="submitter-name" class="form-input" placeholder="First and last name" required>
+            </div>
+
+            <div class="form-group">
+              <label for="submitter-email" class="form-label">Your Email <span class="form-required" aria-hidden="true">*</span></label>
+              <input type="email" id="submitter-email" name="submitter-email" class="form-input" placeholder="you@example.com" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="org-relationship" class="form-label">Relationship to Organization <span class="form-required" aria-hidden="true">*</span></label>
+            <select id="org-relationship" name="relationship" class="form-select" required>
+              <option value="" disabled selected>Select one</option>
+              <option value="I work here">I work here</option>
+              <option value="I volunteer here">I volunteer here</option>
+              <option value="I'm a donor">I'm a donor</option>
+              <option value="I just know them">I just know them</option>
+            </select>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn-primary btn-primary--large submit-btn">Submit for Review</button>
+          </div>
+        </form>
+
+        <p class="submit-note text-small text-muted">All submissions are reviewed before being added to the directory. We typically review within 3-5 business days.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ====== Footer ====== -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <img src="../../assets/logo-stacked-reversed.png" alt="Virginia Nonprofits" class="footer-logo">
+          <p class="footer-tagline">A Curated Public Directory</p>
+          <p>Connecting Virginians with the nonprofits doing meaningful work in their communities.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Navigation</h4>
+          <a href="../../pages/directory/directory.html">Directory</a>
+          <a href="../../pages/about/about.html">About</a>
+          <a href="../../pages/submit/submit.html">Submit a Nonprofit</a>
+        </div>
+        <div class="footer-col">
+          <h4>Legal &amp; Press</h4>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms</a>
+          <a href="mailto:hello@virginianonprofits.org">Press Inquiries</a>
+        </div>
+        <div class="footer-col">
+          <h4>Connect</h4>
+          <a href="../../index.html#newsletter">Newsletter</a>
+          <a href="mailto:hello@virginianonprofits.org">hello@virginianonprofits.org</a>
+          <p>A Brenneis AI project</p>
+          <p>virginianonprofits.org</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; <span id="copyright-year"></span> Virginia Nonprofits. All rights reserved.</p>
+        <a href="https://brenneisai.com" target="_blank" rel="noopener noreferrer">A Brenneis AI project</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../global/nav.js" defer></script>
+</body>
+</html>

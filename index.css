@@ -1,0 +1,325 @@
+/* ==========================================================================
+   index.css — Virginia Nonprofits Homepage
+   ========================================================================== */
+
+/* ==========================================================================
+   Hero
+   ========================================================================== */
+
+.hero {
+  background: var(--hero-gradient);
+  padding: calc(var(--space-3xl) + 4rem) 0 var(--space-3xl);
+  text-align: center;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+}
+
+.hero-inner {
+  max-width: 48rem;
+  margin: 0 auto;
+}
+
+.hero-headline {
+  font-family: var(--font-display);
+  font-size: var(--text-display);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-display);
+  letter-spacing: var(--tracking-display);
+  color: var(--color-on-primary);
+  margin-bottom: var(--space-lg);
+}
+
+.hero-subhead {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  color: rgba(var(--color-on-primary-rgb), 0.8);
+  margin-bottom: var(--space-xl);
+  max-width: 36rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-ctas {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  align-items: center;
+}
+
+@media (min-width: 769px) {
+  .hero {
+    padding: calc(var(--space-3xl) + 5rem) 0 var(--space-3xl);
+  }
+
+  .hero-subhead {
+    font-size: 1.125rem;
+  }
+
+  .hero-ctas {
+    flex-direction: row;
+    justify-content: center;
+  }
+}
+
+/* ==========================================================================
+   Filter Bar
+   ========================================================================== */
+
+.filter-bar {
+  background-color: var(--color-background);
+  padding: var(--space-xl) 0;
+}
+
+.filter-group {
+  margin-bottom: var(--space-md);
+}
+
+.filter-group:last-child {
+  margin-bottom: 0;
+}
+
+.filter-label {
+  display: block;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-sm);
+  text-transform: uppercase;
+}
+
+.pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+/* ==========================================================================
+   Featured Nonprofits
+   ========================================================================== */
+
+.featured {
+  background-color: var(--color-surface-container-low);
+  padding: var(--space-3xl) 0;
+}
+
+.featured-heading {
+  margin-bottom: var(--space-xl);
+}
+
+.featured-grid-top {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-xl);
+  margin-bottom: var(--space-xl);
+}
+
+.featured-card-lg {
+  padding: 0;
+  overflow: hidden;
+}
+
+.featured-card-lg .card-content {
+  padding: var(--space-lg);
+}
+
+.featured-grid-bottom {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-xl);
+}
+
+.featured-card-sm {
+  padding: 0;
+}
+
+.featured-card-sm .card-content {
+  padding: var(--space-lg);
+}
+
+@media (min-width: 769px) {
+  .featured-grid-top {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .featured-grid-bottom {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+/* ==========================================================================
+   Nonprofit of the Month Inset — LAYOUT BOLDNESS TARGET
+   ========================================================================== */
+
+.nonprofit-of-month {
+  background-color: var(--color-primary-container);
+  border-radius: var(--radius-default);
+  padding: var(--space-2xl) var(--space-lg);
+  margin-top: calc(-1 * var(--space-xl));
+  margin-bottom: calc(-1 * var(--space-xl));
+  position: relative;
+  z-index: var(--z-card);
+  text-align: center;
+}
+
+.notm-inner {
+  max-width: 36rem;
+  margin: 0 auto;
+}
+
+.notm-eyebrow {
+  display: block;
+  color: var(--color-secondary-display);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: var(--space-md);
+}
+
+.notm-name {
+  font-family: var(--font-display);
+  font-size: var(--text-h2);
+  font-weight: var(--weight-bold);
+  color: var(--color-on-primary);
+  margin-bottom: var(--space-sm);
+}
+
+.notm-tags {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+}
+
+.notm-tag {
+  background-color: rgba(var(--color-on-primary-rgb), 0.1);
+  color: var(--color-on-primary-container);
+}
+
+.notm-quote {
+  margin-bottom: var(--space-lg);
+}
+
+.notm-quote p {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  color: var(--color-on-primary-container);
+  font-style: italic;
+}
+
+.notm-cta {
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  font-weight: var(--weight-medium);
+  color: var(--color-secondary-display);
+  text-decoration: underline;
+  text-decoration-color: var(--color-secondary-display);
+  text-underline-offset: 0.2em;
+  transition: color var(--transition-fast);
+}
+
+.notm-cta:hover {
+  color: var(--color-on-primary);
+}
+
+@media (min-width: 769px) {
+  .nonprofit-of-month {
+    margin-top: calc(-1 * var(--space-2xl));
+    margin-bottom: calc(-1 * var(--space-xl));
+    padding: var(--space-2xl) var(--space-3xl);
+    margin-left: var(--space-2xl);
+    margin-right: var(--space-2xl);
+  }
+}
+
+/* ==========================================================================
+   Mission Strip
+   ========================================================================== */
+
+.mission-strip {
+  background-color: var(--color-background);
+  padding: var(--space-3xl) 0;
+  text-align: center;
+}
+
+.mission-quote {
+  max-width: 42rem;
+  margin: 0 auto var(--space-lg);
+}
+
+.mission-quote p {
+  font-family: var(--font-display);
+  font-size: var(--text-h2);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-headline);
+  letter-spacing: var(--tracking-headline);
+  color: var(--color-on-surface);
+  margin-bottom: 0;
+}
+
+.mission-subtext {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  color: var(--color-text-muted);
+  max-width: 36rem;
+  margin: 0 auto;
+}
+
+/* ==========================================================================
+   Newsletter
+   ========================================================================== */
+
+.newsletter {
+  background-color: var(--color-surface-container);
+  padding: var(--space-3xl) 0;
+}
+
+.newsletter-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-xl);
+  align-items: center;
+}
+
+.newsletter-title {
+  font-family: var(--font-display);
+  font-size: var(--text-h2);
+  font-weight: var(--weight-bold);
+  margin-bottom: var(--space-sm);
+}
+
+.newsletter-desc {
+  font-size: var(--text-body);
+  color: var(--color-text-muted);
+}
+
+.newsletter-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.newsletter-input {
+  flex: 1;
+}
+
+.newsletter-btn {
+  align-self: flex-start;
+}
+
+@media (min-width: 769px) {
+  .newsletter-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-2xl);
+  }
+
+  .newsletter-form {
+    flex-direction: row;
+    align-items: flex-end;
+  }
+
+  .newsletter-btn {
+    align-self: auto;
+    flex-shrink: 0;
+  }
+}

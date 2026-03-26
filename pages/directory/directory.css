@@ -1,0 +1,318 @@
+/* ==========================================================================
+   directory.css — Virginia Nonprofits Directory Page
+   ========================================================================== */
+
+/* ==========================================================================
+   Page Header
+   ========================================================================== */
+
+.directory-header {
+  background-color: var(--color-background);
+  padding: calc(var(--space-3xl) + 4rem) 0 var(--space-xl);
+  text-align: center;
+}
+
+.directory-title {
+  font-family: var(--font-display);
+  font-size: var(--text-display);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-display);
+  letter-spacing: var(--tracking-display);
+  margin-bottom: var(--space-sm);
+}
+
+.directory-subhead {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-xl);
+  max-width: 32rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.directory-search {
+  max-width: 36rem;
+  margin: 0 auto;
+}
+
+.directory-search-input {
+  text-align: center;
+  font-size: var(--text-body);
+}
+
+.directory-search-input:focus {
+  text-align: left;
+}
+
+/* ==========================================================================
+   Sticky Filter Bar
+   ========================================================================== */
+
+.sticky-filter {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-sticky);
+  background-color: var(--color-background);
+  padding: var(--space-md) 0;
+  transition: box-shadow var(--transition-base);
+}
+
+.sticky-filter .filter-group {
+  margin-bottom: var(--space-sm);
+}
+
+.sticky-filter .filter-group:last-of-type {
+  margin-bottom: var(--space-sm);
+}
+
+.sticky-filter .filter-label {
+  display: block;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-xs);
+  text-transform: uppercase;
+  font-size: var(--text-label);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-label);
+}
+
+.sticky-filter .pill-row {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: var(--space-sm);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding-bottom: var(--space-xs);
+}
+
+.sticky-filter .pill-row::-webkit-scrollbar {
+  display: none;
+}
+
+.filter-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: var(--space-sm);
+}
+
+.filter-count {
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  color: var(--color-text-muted);
+}
+
+.filter-clear {
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  font-weight: var(--weight-medium);
+  color: var(--color-secondary-display);
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-color: var(--color-secondary-display);
+  text-underline-offset: 0.15em;
+  padding: 0;
+}
+
+.filter-clear:hover {
+  color: var(--color-secondary);
+}
+
+@media (min-width: 769px) {
+  .sticky-filter .pill-row {
+    flex-wrap: wrap;
+    overflow-x: visible;
+  }
+}
+
+/* ==========================================================================
+   Listings Grid
+   ========================================================================== */
+
+.listings {
+  background-color: var(--color-surface-container-low);
+  padding: var(--space-2xl) 0 var(--space-3xl);
+}
+
+.listings-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-xl);
+}
+
+.listing-card {
+  background-color: var(--color-surface-container-lowest);
+  border-radius: var(--radius-default);
+  transition: var(--transition-hover);
+}
+
+.listing-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-ambient);
+}
+
+.listing-card.is-hidden {
+  display: none;
+}
+
+.listing-content {
+  padding: var(--space-lg);
+}
+
+.listing-name {
+  font-family: var(--font-display);
+  font-size: var(--text-h3);
+  font-weight: var(--weight-bold);
+  margin-bottom: var(--space-sm);
+}
+
+.listing-mission {
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  line-height: var(--leading-small);
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-md);
+}
+
+.listing-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.listing-bookmark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  color: var(--color-text-lighter);
+  background: none;
+  border: none;
+  border-radius: var(--radius-default);
+  cursor: pointer;
+  transition: color var(--transition-fast);
+}
+
+.listing-bookmark:hover {
+  color: var(--color-secondary-display);
+}
+
+/* Expanded card (every 3rd) */
+.listing-card--expanded .listing-name {
+  font-size: var(--text-h2);
+}
+
+.listing-card--expanded .listing-mission {
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+}
+
+@media (min-width: 769px) {
+  .listings-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+  }
+
+  .listing-card--expanded {
+    grid-column: 1 / -1;
+  }
+
+  .listing-card--expanded .listing-content {
+    padding: var(--space-xl) var(--space-2xl);
+  }
+}
+
+/* ==========================================================================
+   Empty State
+   ========================================================================== */
+
+.listings-empty {
+  text-align: center;
+  padding: var(--space-3xl) var(--space-md);
+}
+
+.listings-empty-text {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-lg);
+  max-width: 32rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ==========================================================================
+   Pagination
+   ========================================================================== */
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  margin-top: var(--space-2xl);
+}
+
+.pagination-btn {
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  font-weight: var(--weight-medium);
+  color: var(--color-primary);
+  background: none;
+  border: none;
+  padding: var(--space-sm) var(--space-md);
+  cursor: pointer;
+  border-radius: var(--radius-default);
+  transition: color var(--transition-fast), background-color var(--transition-fast);
+  text-decoration: underline;
+  text-decoration-color: var(--color-secondary-display);
+  text-underline-offset: 0.15em;
+}
+
+.pagination-btn:hover:not(:disabled) {
+  color: var(--color-secondary-display);
+}
+
+.pagination-btn:disabled {
+  color: var(--color-text-lighter);
+  cursor: not-allowed;
+  text-decoration: none;
+}
+
+.pagination-pages {
+  display: flex;
+  gap: var(--space-xs);
+}
+
+.pagination-page {
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  font-weight: var(--weight-medium);
+  width: 2.25rem;
+  height: 2.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-default);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-on-surface);
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+.pagination-page:hover {
+  background-color: var(--color-surface-container);
+}
+
+.pagination-page.is-active {
+  background-color: var(--color-secondary-display);
+  color: var(--color-on-surface);
+  font-weight: var(--weight-bold);
+}
