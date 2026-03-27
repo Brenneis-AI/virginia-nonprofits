@@ -1,0 +1,755 @@
+/*
+  File: home.css
+  Page: Home
+  Section: Combined styles � paste into GHL Home step Custom CSS
+  Last Updated: 2026-03-27
+*/
+
+/* === Shared Component Styles === */
+
+/* ---------- Typography Base ---------- */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: var(--weight-bold);
+  color: var(--color-on-surface);
+}
+
+h1 {
+  font-size: var(--text-h1);
+  line-height: var(--leading-display);
+  letter-spacing: var(--tracking-display);
+}
+
+h2 {
+  font-size: var(--text-h2);
+  line-height: var(--leading-headline);
+  letter-spacing: var(--tracking-headline);
+}
+
+h3 {
+  font-size: var(--text-h3);
+  line-height: var(--leading-title);
+  letter-spacing: var(--tracking-normal);
+}
+
+p {
+  margin-bottom: var(--space-md);
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+.text-small {
+  font-size: var(--text-small);
+  line-height: var(--leading-small);
+}
+
+.text-label {
+  font-size: var(--text-label);
+  font-weight: var(--weight-medium);
+  line-height: var(--leading-label);
+  letter-spacing: var(--tracking-label);
+}
+
+.text-muted {
+  color: var(--color-text-muted);
+}
+
+.text-lighter {
+  color: var(--color-text-lighter);
+}
+/* ==========================================================================
+   Grain Texture Overlay
+   ========================================================================== */
+
+.grain-overlay {
+  position: relative;
+}
+
+.grain-overlay::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  opacity: var(--grain-opacity);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.grain-overlay > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* ==========================================================================
+   Surface Tier Utilities
+   ========================================================================== */
+
+.surface-background {
+  background-color: var(--color-background);
+}
+
+.surface-container {
+  background-color: var(--color-surface-container);
+}
+
+.surface-container-low {
+  background-color: var(--color-surface-container-low);
+}
+
+.surface-container-lowest {
+  background-color: var(--color-surface-container-lowest);
+}
+
+.surface-container-highest {
+  background-color: var(--color-surface-container-highest);
+}
+
+.surface-primary {
+  background: var(--gradient-primary);
+  color: var(--color-on-primary);
+}
+
+.surface-primary-container {
+  background-color: var(--color-primary-container);
+  color: var(--color-on-primary-container);
+}
+
+/* ==========================================================================
+   Card Component
+   ========================================================================== */
+
+.card {
+  background-color: var(--color-surface-container-lowest);
+  border-radius: var(--radius-default);
+  padding: var(--space-lg);
+  transition: var(--transition-hover);
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-ambient);
+}
+
+.card-image {
+  border-radius: var(--radius-default) var(--radius-default) 0 0;
+  aspect-ratio: 16 / 9;
+}
+
+/* Cause-category surface block colors */
+.card-image[data-cause="youth-education"]    { background: var(--color-cause-youth-education); }
+.card-image[data-cause="food-security"]      { background: var(--color-cause-food-security); }
+.card-image[data-cause="housing"]            { background: var(--color-cause-housing); }
+.card-image[data-cause="arts-culture"]       { background: var(--color-cause-arts-culture); }
+.card-image[data-cause="veterans"]           { background: var(--color-cause-veterans); }
+.card-image[data-cause="health-wellness"]    { background: var(--color-cause-health-wellness); }
+.card-image[data-cause="environment"]        { background: linear-gradient(135deg, var(--color-cause-environment-start), var(--color-cause-environment-end)); }
+.card-image[data-cause="animal-welfare"]     { background-color: var(--color-surface-container); box-shadow: inset 0 0 40px var(--color-cause-animal-welfare); }
+.card-image[data-cause="faith-based"]        { background: var(--color-cause-faith-based); }
+.card-image[data-cause="civic-community"]    { background: var(--color-cause-civic-community); }
+
+.card-content {
+  padding: var(--space-lg) var(--space-lg) var(--space-md);
+}
+
+.card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-sm);
+}
+
+.card-title {
+  font-family: var(--font-display);
+  font-size: var(--text-h3);
+  font-weight: var(--weight-bold);
+  margin-bottom: var(--space-sm);
+}
+
+.card-mission {
+  font-size: var(--text-small);
+  line-height: var(--leading-small);
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-md);
+}
+
+/* ==========================================================================
+   Button Styles
+   ========================================================================== */
+
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  background: transparent;
+  color: var(--color-secondary-display);
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  font-weight: var(--weight-medium);
+  text-decoration: none;
+  border-radius: var(--radius-sm);
+  transition: var(--transition-hover), outline-color var(--transition-fast);
+  outline: 1px solid transparent;
+  white-space: nowrap;
+}
+
+.btn-secondary:hover {
+  transform: translateY(-2px);
+  outline-color: rgba(var(--color-outline-variant-rgb), 0.15);
+  color: var(--color-secondary-display);
+}
+
+.btn-secondary--light {
+  color: var(--color-on-primary);
+}
+
+.btn-secondary--light:hover {
+  color: var(--color-secondary-display);
+  outline-color: rgba(var(--color-on-primary-rgb), 0.15);
+}
+
+.btn-card {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background: var(--gradient-primary);
+  color: var(--color-on-primary);
+  font-family: var(--font-body);
+  font-size: var(--text-label);
+  font-weight: var(--weight-medium);
+  text-decoration: none;
+  border-radius: var(--radius-sm);
+  transition: var(--transition-hover);
+  white-space: nowrap;
+}
+
+.btn-card:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-ambient);
+  color: var(--color-on-primary);
+}
+
+/* ==========================================================================
+   Input / Form Styles
+   ========================================================================== */
+
+.form-group {
+  margin-bottom: var(--space-lg);
+}
+
+.form-label {
+  display: block;
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  font-weight: var(--weight-medium);
+  color: var(--color-on-surface);
+  margin-bottom: var(--space-sm);
+}
+
+.form-input,
+.form-select,
+.form-textarea {
+  display: block;
+  width: 100%;
+  padding: 0.875rem var(--space-md);
+  background-color: var(--color-surface-container-highest);
+  color: var(--color-on-surface);
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  border: none;
+  border-bottom: 2px solid transparent;
+  border-radius: var(--radius-default);
+  transition: border-color var(--transition-fast);
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  border-bottom-color: var(--color-secondary);
+  outline: none;
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+  color: var(--color-text-lighter);
+}
+
+.form-select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235a5c56' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right var(--space-md) center;
+  padding-right: var(--space-2xl);
+  cursor: pointer;
+}
+
+.form-textarea {
+  min-height: 8rem;
+  resize: vertical;
+}
+
+/* ==========================================================================
+   Pill / Tag Component
+   ========================================================================== */
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-xs) var(--space-sm);
+  background-color: var(--color-surface-container-lowest);
+  color: var(--color-on-surface);
+  font-family: var(--font-body);
+  font-size: var(--text-label);
+  font-weight: var(--weight-medium);
+  line-height: var(--leading-label);
+  letter-spacing: var(--tracking-label);
+  border-radius: var(--radius-default);
+  text-decoration: none;
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.pill:hover {
+  background-color: var(--color-surface-container);
+  color: var(--color-on-surface);
+}
+
+.pill.is-active,
+.pill:active {
+  background-color: var(--color-secondary-display);
+  color: var(--color-on-surface);
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.125rem var(--space-sm);
+  background-color: var(--color-surface-container-low);
+  color: var(--color-text-muted);
+  font-family: var(--font-body);
+  font-size: var(--text-label);
+  font-weight: var(--weight-medium);
+  line-height: var(--leading-label);
+  letter-spacing: var(--tracking-label);
+  border-radius: var(--radius-default);
+}
+
+/* ==========================================================================
+   Section Spacing
+   ========================================================================== */
+
+.section {
+  padding-top: var(--space-3xl);
+  padding-bottom: var(--space-3xl);
+}
+
+.section--tight {
+  padding-top: var(--space-2xl);
+  padding-bottom: var(--space-2xl);
+}
+
+.section--flush-top {
+  padding-top: 0;
+}
+
+/* ==========================================================================
+   Section Animate (IntersectionObserver)
+   ========================================================================== */
+
+.section-animate {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 500ms ease, transform 500ms ease;
+}
+
+.section-animate.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ==========================================================================
+   Hero Entrance Animation (Home page — CSS only)
+   ========================================================================== */
+
+.hero-animate-headline {
+  opacity: 0;
+  transform: translateY(24px);
+  animation: heroFadeUp 450ms ease forwards;
+}
+
+.hero-animate-subhead {
+  opacity: 0;
+  transform: translateY(24px);
+  animation: heroFadeUp 450ms ease 150ms forwards;
+}
+
+.hero-animate-ctas {
+  opacity: 0;
+  transform: translateY(24px);
+  animation: heroFadeUp 450ms ease 300ms forwards;
+}
+
+@keyframes heroFadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================================================
+   Utility
+   ========================================================================== */
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+
+@media (min-width: 769px) {
+  .container {
+    padding-left: var(--space-xl);
+    padding-right: var(--space-xl);
+  }
+}
+
+/* === Home Page Styles === */
+
+/* ==========================================================================
+   index.css — Virginia Nonprofits Homepage
+   ========================================================================== */
+
+/* ==========================================================================
+   Hero
+   ========================================================================== */
+
+.hero {
+  background: var(--hero-gradient);
+  padding: calc(var(--space-3xl) + 4rem) 0 var(--space-3xl);
+  text-align: center;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+}
+
+.hero-inner {
+  max-width: 48rem;
+  margin: 0 auto;
+}
+
+.hero-headline {
+  font-family: var(--font-display);
+  font-size: var(--text-display);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-display);
+  letter-spacing: var(--tracking-display);
+  color: var(--color-on-primary);
+  margin-bottom: var(--space-lg);
+}
+
+.hero-subhead {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  color: rgba(var(--color-on-primary-rgb), 0.8);
+  margin-bottom: var(--space-xl);
+  max-width: 36rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-ctas {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  align-items: center;
+}
+
+@media (min-width: 769px) {
+  .hero {
+    padding: calc(var(--space-3xl) + 5rem) 0 var(--space-3xl);
+  }
+
+  .hero-subhead {
+    font-size: 1.125rem;
+  }
+
+  .hero-ctas {
+    flex-direction: row;
+    justify-content: center;
+  }
+}
+
+/* ==========================================================================
+   Filter Bar
+   ========================================================================== */
+
+.filter-bar {
+  background-color: var(--color-background);
+  padding: var(--space-xl) 0;
+}
+
+.filter-group {
+  margin-bottom: var(--space-md);
+}
+
+.filter-group:last-child {
+  margin-bottom: 0;
+}
+
+.filter-label {
+  display: block;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-sm);
+  text-transform: uppercase;
+}
+
+.pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+/* ==========================================================================
+   Featured Nonprofits
+   ========================================================================== */
+
+.featured {
+  background-color: var(--color-surface-container-low);
+  padding: var(--space-3xl) 0;
+}
+
+.featured-heading {
+  margin-bottom: var(--space-xl);
+}
+
+.featured-grid-top {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-xl);
+  margin-bottom: var(--space-xl);
+}
+
+.featured-card-lg {
+  padding: 0;
+  overflow: hidden;
+}
+
+.featured-card-lg .card-content {
+  padding: var(--space-lg);
+}
+
+.featured-grid-bottom {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-xl);
+}
+
+.featured-card-sm {
+  padding: 0;
+}
+
+.featured-card-sm .card-content {
+  padding: var(--space-lg);
+}
+
+@media (min-width: 769px) {
+  .featured-grid-top {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .featured-grid-bottom {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+/* ==========================================================================
+   Nonprofit of the Month Inset — LAYOUT BOLDNESS TARGET
+   ========================================================================== */
+
+.nonprofit-of-month {
+  background-color: var(--color-primary-container);
+  border-radius: var(--radius-default);
+  padding: var(--space-2xl) var(--space-lg);
+  margin: var(--space-2xl) 0;
+  text-align: center;
+  position: static;
+  z-index: auto;
+}
+
+.notm-inner {
+  max-width: 36rem;
+  margin: 0 auto;
+}
+
+.notm-eyebrow {
+  display: block;
+  color: var(--color-secondary-display);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: var(--space-md);
+}
+
+.notm-name {
+  font-family: var(--font-display);
+  font-size: var(--text-h2);
+  font-weight: var(--weight-bold);
+  color: var(--color-on-primary);
+  margin-bottom: var(--space-sm);
+}
+
+.notm-tags {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+}
+
+.notm-tag {
+  background-color: rgba(var(--color-on-primary-rgb), 0.1);
+  color: var(--color-on-primary-container);
+}
+
+.notm-quote {
+  margin-bottom: var(--space-lg);
+}
+
+.notm-quote p {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  color: var(--color-on-primary-container);
+  font-style: italic;
+}
+
+.notm-cta {
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  font-weight: var(--weight-medium);
+  color: var(--color-secondary-display);
+  text-decoration: underline;
+  text-decoration-color: var(--color-secondary-display);
+  text-underline-offset: 0.2em;
+  transition: color var(--transition-fast);
+}
+
+.notm-cta:hover {
+  color: var(--color-on-primary);
+}
+
+@media (min-width: 769px) {
+  .nonprofit-of-month {
+    padding: var(--space-3xl) var(--space-xl);
+  }
+}
+
+/* ==========================================================================
+   Mission Strip
+   ========================================================================== */
+
+.mission-strip {
+  background-color: var(--color-background);
+  padding: var(--space-3xl) 0;
+  text-align: center;
+}
+
+.mission-quote {
+  max-width: 42rem;
+  margin: 0 auto var(--space-lg);
+}
+
+.mission-quote p {
+  font-family: var(--font-display);
+  font-size: var(--text-h2);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-headline);
+  letter-spacing: var(--tracking-headline);
+  color: var(--color-on-surface);
+  margin-bottom: 0;
+}
+
+.mission-subtext {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  color: var(--color-text-muted);
+  max-width: 36rem;
+  margin: 0 auto;
+}
+
+/* ==========================================================================
+   Newsletter
+   ========================================================================== */
+
+.newsletter {
+  background-color: var(--color-surface-container);
+  padding: var(--space-3xl) 0;
+}
+
+.newsletter-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-xl);
+  align-items: center;
+}
+
+.newsletter-title {
+  font-family: var(--font-display);
+  font-size: var(--text-h2);
+  font-weight: var(--weight-bold);
+  margin-bottom: var(--space-sm);
+}
+
+.newsletter-desc {
+  font-size: var(--text-body);
+  color: var(--color-text-muted);
+}
+
+.newsletter-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.newsletter-input {
+  flex: 1;
+}
+
+.newsletter-btn {
+  align-self: flex-start;
+}
+
+@media (min-width: 769px) {
+  .newsletter-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-2xl);
+  }
+
+  .newsletter-form {
+    flex-direction: row;
+    align-items: flex-end;
+  }
+
+  .newsletter-btn {
+    align-self: auto;
+    flex-shrink: 0;
+  }
+}

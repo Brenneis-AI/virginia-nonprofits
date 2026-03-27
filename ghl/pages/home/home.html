@@ -1,0 +1,170 @@
+<!--
+  File: home.html
+  Page: Home
+  Section: Full page body content — paste into GHL Home step Custom HTML element
+  Last Updated: 2026-03-27
+-->
+
+<!-- ====== Hero ====== -->
+<section class="hero grain-overlay">
+  <div class="container hero-inner">
+    <h1 class="hero-headline hero-animate-headline">Find Nonprofits Doing Good in Your Corner of Virginia</h1>
+    <p class="hero-subhead hero-animate-subhead">A curated directory helping donors and volunteers discover the meaningful local work happening across the Commonwealth.</p>
+    <div class="hero-ctas hero-animate-ctas">
+      <a href="/directory?filter=region" class="btn-primary btn-primary--large">Browse by Region</a>
+      <a href="/directory?filter=cause" class="btn-secondary btn-secondary--light">Browse by Cause</a>
+    </div>
+  </div>
+</section>
+
+<!-- ====== Filter Bar ====== -->
+<section class="filter-bar section-animate" aria-label="Browse filters">
+  <div class="container">
+    <div class="filter-group">
+      <span class="filter-label text-label">Region</span>
+      <div class="pill-row">
+        <a href="/directory" class="pill is-active">All Regions</a>
+        <a href="/directory?region=shenandoah-valley" class="pill">Shenandoah Valley</a>
+        <a href="/directory?region=southwest-va" class="pill">Southwest VA</a>
+        <a href="/directory?region=central-va" class="pill">Central VA</a>
+        <a href="/directory?region=northern-va" class="pill">Northern VA</a>
+        <a href="/directory?region=hampton-roads" class="pill">Hampton Roads</a>
+        <a href="/directory?region=southside-va" class="pill">Southside VA</a>
+      </div>
+    </div>
+    <div class="filter-group">
+      <span class="filter-label text-label">Cause</span>
+      <div class="pill-row">
+        <a href="/directory?cause=youth-education" class="pill">Youth &amp; Education</a>
+        <a href="/directory?cause=food-security" class="pill">Food Security</a>
+        <a href="/directory?cause=housing" class="pill">Housing</a>
+        <a href="/directory?cause=arts-culture" class="pill">Arts &amp; Culture</a>
+        <a href="/directory?cause=veterans" class="pill">Veterans</a>
+        <a href="/directory?cause=health-wellness" class="pill">Health &amp; Wellness</a>
+        <a href="/directory?cause=environment" class="pill">Environment</a>
+        <a href="/directory?cause=animal-welfare" class="pill">Animal Welfare</a>
+        <a href="/directory?cause=faith-based" class="pill">Faith-Based</a>
+        <a href="/directory?cause=civic-community" class="pill">Civic &amp; Community</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== Featured Nonprofits ====== -->
+<section class="featured section-animate" aria-labelledby="featured-heading">
+  <div class="container">
+    <h2 id="featured-heading" class="featured-heading">Featured Nonprofits</h2>
+
+    <!-- Top Row — Large Cards -->
+    <div class="featured-grid-top">
+      <article class="card featured-card-lg">
+        <div class="card-image" data-cause="youth-education" style="background-color: rgba(1, 45, 29, 0.15)" role="presentation" aria-hidden="true"></div>
+        <div class="card-content">
+          <div class="card-tags">
+            <span class="tag">Shenandoah Valley</span>
+            <span class="tag">Youth &amp; Education</span>
+          </div>
+          <h3 class="card-title">Blue Ridge Young Writers</h3>
+          <p class="card-mission">Running free after-school writing workshops for rural students from Staunton to Woodstock, because every young voice in the Valley deserves a page.</p>
+          <a href="https://blueridgeyoungwriters.org" class="btn-card" target="_blank" rel="noopener noreferrer">Visit Website</a>
+        </div>
+      </article>
+
+      <article class="card featured-card-lg">
+        <div class="card-image" data-cause="civic-community" style="background-color: rgba(27, 67, 50, 0.10)" role="presentation" aria-hidden="true"></div>
+        <div class="card-content">
+          <div class="card-tags">
+            <span class="tag">Central VA</span>
+            <span class="tag">Civic &amp; Community</span>
+          </div>
+          <h3 class="card-title">Richmond Mutual Aid Network</h3>
+          <p class="card-mission">Coordinating neighbor-to-neighbor support across Richmond's East End — rides to appointments, grocery runs, and emergency supply distribution.</p>
+          <a href="https://richmondmutualaid.org" class="btn-card" target="_blank" rel="noopener noreferrer">Visit Website</a>
+        </div>
+      </article>
+    </div>
+
+    <!-- Nonprofit of the Month Inset — LAYOUT BOLDNESS TARGET -->
+    <aside class="nonprofit-of-month grain-overlay" aria-labelledby="notm-heading">
+      <div class="notm-inner">
+        <span class="notm-eyebrow text-label">Nonprofit of the Month</span>
+        <h3 id="notm-heading" class="notm-name">Chesapeake Bay Youth Sailing</h3>
+        <div class="notm-tags">
+          <span class="tag notm-tag">Hampton Roads</span>
+          <span class="tag notm-tag">Youth &amp; Education</span>
+        </div>
+        <blockquote class="notm-quote">
+          <p>Teaching sailing and marine science to underserved middle-schoolers on the Chesapeake Bay through a free summer academy in Norfolk.</p>
+        </blockquote>
+        <a href="/directory" class="notm-cta">Read Their Story</a>
+      </div>
+    </aside>
+
+    <!-- Bottom Row — Small Cards -->
+    <div class="featured-grid-bottom">
+      <article class="card featured-card-sm">
+        <div class="card-content">
+          <div class="card-tags">
+            <span class="tag">Southwest VA</span>
+            <span class="tag">Arts &amp; Culture</span>
+          </div>
+          <h3 class="card-title">Coalfield Arts Collective</h3>
+          <p class="card-mission">Transforming shuttered storefronts in Wise and Dickenson counties into working artist studios and community gallery space.</p>
+          <a href="https://coalfieldarts.org" class="btn-card" target="_blank" rel="noopener noreferrer">Visit Website</a>
+        </div>
+      </article>
+
+      <article class="card featured-card-sm">
+        <div class="card-content">
+          <div class="card-tags">
+            <span class="tag">Northern VA</span>
+            <span class="tag">Housing</span>
+          </div>
+          <h3 class="card-title">Arlington Neighbors Together</h3>
+          <p class="card-mission">Preventing evictions in Arlington and Alexandria through emergency rental assistance, landlord mediation, and financial counseling.</p>
+          <a href="https://arlingtonneighbors.org" class="btn-card" target="_blank" rel="noopener noreferrer">Visit Website</a>
+        </div>
+      </article>
+
+      <article class="card featured-card-sm">
+        <div class="card-content">
+          <div class="card-tags">
+            <span class="tag">Southside VA</span>
+            <span class="tag">Food Security</span>
+          </div>
+          <h3 class="card-title">Dan River Farms to Families</h3>
+          <p class="card-mission">Gleaning surplus from tobacco-turned-produce farms along the Dan River and delivering fresh food boxes to families in Pittsylvania and Halifax counties.</p>
+          <a href="https://danriverfarms.org" class="btn-card" target="_blank" rel="noopener noreferrer">Visit Website</a>
+        </div>
+      </article>
+    </div>
+
+  </div>
+</section>
+
+<!-- ====== Mission Strip ====== -->
+<section class="mission-strip section-animate" aria-label="Mission statement">
+  <div class="container">
+    <blockquote class="mission-quote">
+      <p>Built for Virginians who want to find — and support — the organizations doing real work in their communities.</p>
+    </blockquote>
+    <p class="mission-subtext">Virginia has thousands of nonprofits. Most of them never make the news. This directory exists so the ones doing honest, local work don't stay invisible.</p>
+  </div>
+</section>
+
+<!-- ====== Newsletter ====== -->
+<section class="newsletter section-animate" id="newsletter" aria-labelledby="newsletter-heading">
+  <div class="container">
+    <div class="newsletter-grid">
+      <div class="newsletter-text">
+        <h2 id="newsletter-heading" class="newsletter-title">The Virginia Nonprofits Weekly</h2>
+        <p class="newsletter-desc">Curated nonprofit spotlights, volunteer opportunities, and community impact stories delivered every Sunday.</p>
+      </div>
+      <!-- TODO: Replace [FORM_ID] with actual GHL newsletter form ID -->
+      <iframe src="https://link.virginianonprofits.org/widget/form/[FORM_ID]"
+              style="width:100%;height:200px;border:none;"
+              title="Newsletter Signup Form">
+      </iframe>
+    </div>
+  </div>
+</section>

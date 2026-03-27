@@ -1,0 +1,147 @@
+<!--
+  File: footer.html
+  Page: Global
+  Section: Self-contained footer — paste into GHL Funnel Settings → Footer Code
+  Last Updated: 2026-03-27
+-->
+
+<style>
+/* ================================================================
+   Footer
+   ================================================================ */
+
+.site-footer {
+  background-color: var(--color-primary);
+  color: var(--color-on-primary);
+  padding: var(--space-3xl) 0 var(--space-xl);
+  position: relative;
+}
+
+.site-footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  opacity: var(--grain-opacity);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.site-footer .container {
+  position: relative;
+  z-index: 1;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-xl);
+}
+
+.footer-col h4 {
+  font-family: var(--font-display);
+  font-size: var(--text-small);
+  font-weight: var(--weight-bold);
+  color: var(--color-on-primary);
+  margin-bottom: var(--space-md);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+}
+
+.footer-col p {
+  font-size: var(--text-small);
+  line-height: var(--leading-small);
+  color: rgba(var(--color-on-primary-rgb), 0.7);
+  margin-bottom: var(--space-sm);
+}
+
+.footer-col a {
+  color: var(--color-on-primary);
+  text-decoration: none;
+  font-size: var(--text-small);
+  line-height: var(--leading-small);
+  display: block;
+  margin-bottom: var(--space-sm);
+  transition: color var(--transition-fast);
+}
+
+.footer-col a:hover {
+  color: var(--color-secondary-display);
+}
+
+.footer-logo {
+  height: 3rem;
+  width: auto;
+  margin-bottom: var(--space-md);
+}
+
+.footer-tagline {
+  font-family: var(--font-display);
+  font-size: var(--text-small);
+  font-weight: var(--weight-bold);
+  color: var(--color-on-primary);
+  margin-bottom: var(--space-sm);
+}
+
+.footer-bottom {
+  margin-top: var(--space-xl);
+  padding-top: var(--space-md);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-sm);
+  color: rgba(var(--color-on-primary-rgb), 0.5);
+  font-size: var(--text-label);
+}
+
+.footer-bottom a {
+  color: var(--color-secondary-display);
+  font-size: var(--text-label);
+}
+
+@media (min-width: 769px) {
+  .footer-grid {
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: var(--space-2xl);
+  }
+}
+</style>
+
+<footer class="site-footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <img src="https://assets.cdn.filesafe.space/3M40xtrRZZRWOmE1zFAN/media/69c697033204cc9b90315370.png" alt="Virginia Nonprofits" class="footer-logo">
+        <p class="footer-tagline">A Curated Public Directory</p>
+        <p>Connecting Virginians with the nonprofits doing meaningful work in their communities.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <a href="/directory">Directory</a>
+        <a href="/about">About</a>
+        <a href="/submit">Submit a Nonprofit</a>
+      </div>
+      <div class="footer-col">
+        <h4>Legal &amp; Press</h4>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms</a>
+        <a href="mailto:hello@virginianonprofits.org">Press Inquiries</a>
+      </div>
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <a href="/#newsletter">Newsletter</a>
+        <a href="mailto:hello@virginianonprofits.org">hello@virginianonprofits.org</a>
+        <p>A Brenneis AI project</p>
+        <p>virginianonprofits.org</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; <span id="copyright-year"></span> Virginia Nonprofits. All rights reserved.</p>
+      <a href="https://brenneisai.com" target="_blank" rel="noopener noreferrer">A Brenneis AI project</a>
+    </div>
+  </div>
+</footer>
