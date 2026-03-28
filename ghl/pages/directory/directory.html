@@ -2,11 +2,15 @@
   File: directory.html
   Page: Directory
   Section: Full page body content — paste into GHL Directory step Custom HTML element
-  Last Updated: 2026-03-27
+  Last Updated: 2026-03-28
 -->
 
+<!-- Supabase JS Client (CDN) -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+
+<div class="vn-content">
     <!-- ====== Page Header ====== -->
-    <section class="directory-header">
+    <section id="main-content" class="directory-header">
       <div class="container">
         <h1 class="directory-title">The Directory</h1>
         <p class="directory-subhead">Explore nonprofits across Virginia by region, cause, or keyword.</p>
@@ -45,6 +49,7 @@
             <button class="pill" data-cause="animal-welfare">Animal Welfare</button>
             <button class="pill" data-cause="faith-based">Faith-Based</button>
             <button class="pill" data-cause="civic-community">Civic &amp; Community</button>
+            <button class="pill" data-cause="sports-recreation">Sports &amp; Recreation</button>
           </div>
         </div>
         <div class="filter-meta">
@@ -60,438 +65,68 @@
 
         <div class="listings-grid" data-listings-grid>
 
-          <!-- 1. Valley Harvest Table -->
-          <article class="listing-card" data-region="shenandoah-valley" data-cause="food-security">
+          <!-- Skeleton loading state -->
+          <article class="listing-card skeleton-card" aria-hidden="true">
             <div class="listing-content">
-              <div class="card-tags">
-                <span class="tag">Shenandoah Valley</span>
-                <span class="tag">Food Security</span>
-              </div>
-              <h3 class="listing-name">Valley Harvest Table</h3>
-              <p class="listing-mission">Recovering surplus produce from Shenandoah Valley farms and delivering weekly shares to families across Rockingham and Augusta counties.</p>
-              <div class="listing-actions">
-                <a href="https://valleyharvesttable.org" class="btn-card" target="_blank" rel="noopener noreferrer">Visit Website</a>
-                <button class="listing-bookmark" aria-label="Bookmark Valley Harvest Table">
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 2h10v13l-5-3.5L3 15V2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
-                </button>
-              </div>
+              <div class="card-tags"><span class="skeleton-line skeleton-tag"></span><span class="skeleton-line skeleton-tag"></span></div>
+              <div class="skeleton-line skeleton-title"></div>
+              <div class="skeleton-line skeleton-text"></div>
+              <div class="skeleton-line skeleton-text skeleton-text--short"></div>
+              <div class="skeleton-line skeleton-action"></div>
+            </div>
+          </article>
+          <article class="listing-card skeleton-card" aria-hidden="true">
+            <div class="listing-content">
+              <div class="card-tags"><span class="skeleton-line skeleton-tag"></span><span class="skeleton-line skeleton-tag"></span></div>
+              <div class="skeleton-line skeleton-title"></div>
+              <div class="skeleton-line skeleton-text"></div>
+              <div class="skeleton-line skeleton-text skeleton-text--short"></div>
+              <div class="skeleton-line skeleton-action"></div>
+            </div>
+          </article>
+          <article class="listing-card skeleton-card" aria-hidden="true">
+            <div class="listing-content">
+              <div class="card-tags"><span class="skeleton-line skeleton-tag"></span><span class="skeleton-line skeleton-tag"></span></div>
+              <div class="skeleton-line skeleton-title"></div>
+              <div class="skeleton-line skeleton-text"></div>
+              <div class="skeleton-line skeleton-text skeleton-text--short"></div>
+              <div class="skeleton-line skeleton-action"></div>
+            </div>
+          </article>
+          <article class="listing-card skeleton-card" aria-hidden="true">
+            <div class="listing-content">
+              <div class="card-tags"><span class="skeleton-line skeleton-tag"></span><span class="skeleton-line skeleton-tag"></span></div>
+              <div class="skeleton-line skeleton-title"></div>
+              <div class="skeleton-line skeleton-text"></div>
+              <div class="skeleton-line skeleton-text skeleton-text--short"></div>
+              <div class="skeleton-line skeleton-action"></div>
+            </div>
+          </article>
+          <article class="listing-card skeleton-card" aria-hidden="true">
+            <div class="listing-content">
+              <div class="card-tags"><span class="skeleton-line skeleton-tag"></span><span class="skeleton-line skeleton-tag"></span></div>
+              <div class="skeleton-line skeleton-title"></div>
+              <div class="skeleton-line skeleton-text"></div>
+              <div class="skeleton-line skeleton-text skeleton-text--short"></div>
+              <div class="skeleton-line skeleton-action"></div>
+            </div>
+          </article>
+          <article class="listing-card skeleton-card" aria-hidden="true">
+            <div class="listing-content">
+              <div class="card-tags"><span class="skeleton-line skeleton-tag"></span><span class="skeleton-line skeleton-tag"></span></div>
+              <div class="skeleton-line skeleton-title"></div>
+              <div class="skeleton-line skeleton-text"></div>
+              <div class="skeleton-line skeleton-text skeleton-text--short"></div>
+              <div class="skeleton-line skeleton-action"></div>
             </div>
           </article>
 
-          <!-- 2. Blue Ridge Young Writers -->
-          <article class="listing-card" data-region="shenandoah-valley" data-cause="youth-education">
-            <div class="listing-content">
-              <div class="card-tags">
-                <span class="tag">Shenandoah Valley</span>
-                <span class="tag">Youth &amp; Education</span>
-              </div>
-              <h3 class="listing-name">Blue Ridge Young Writers</h3>
-              <p class="listing-mission">Running free after-school writing workshops for rural students from Staunton to Woodstock, because every young voice in the Valley deserves a page.</p>
-              <div class="listing-actions">
-                <a href="https://blueridgeyoungwriters.org" class="btn-card" target="_blank" rel="noopener noreferrer">Visit Website</a>
-                <button class="listing-bookmark" aria-label="Bookmark Blue Ridge Young Writers">
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 2h10v13l-5-3.5L3 15V2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
-                </button>
-              </div>
-            </div>
-          </article>
+        </div>
 
-          <!-- 3. Skyline Veterans Ranch — EXPANDED -->
-          <article class="listing-card listing-card--expanded" data-region="shenandoah-valley" data-cause="veterans">
-            <div class="listing-content">
-              <div class="card-tags">
-                <span class="tag">Shenandoah Valley</span>
-                <span class="tag">Veterans</span>
-              </div>
-              <h3 class="listing-name">Skyline Veterans Ranch</h3>
-              <p class="listing-mission">Pairing returning veterans with working farm placements across the northern Shenandoah Valley for equine therapy and agricultural transition.</p>
-              <div class="listing-actions">
-                <a href="https://skylineveteransranch.org" class="btn-card" target="_blank" rel="noopener noreferrer">Visit Website</a>
-                <button class="listing-bookmark" aria-label="Bookmark Skyline Veterans Ranch">
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 2h10v13l-5-3.5L3 15V2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
-                </button>
-              </div>
-            </div>
-          </article>
-
-          <!-- 4. Massanutten Trail Conservancy -->
-          <article class="listing-card" data-region="shenandoah-valley" data-cause="environment">
-            <div class="listing-content">
-              <div class="card-tags">
-                <span class="tag">Shenandoah Valley</span>
-                <span class="tag">Environment</span>
-              </div>
-              <h3 class="listing-name">Massanutten Trail Conservancy</h3>
-              <p class="listing-mission">Maintaining 72 miles of public trail in the Massanutten range and restoring native habitat along the South Fork of the Shenandoah River.</p>
-              <div class="listing-actions">
-                <a href="https://massanuttentrails.org" class="btn-card" target="_blank" rel="noopener noreferrer">Visit Website</a>
-                <button class="listing-bookmark" aria-label="Bookmark Massanutten Trail Conservancy">
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 2h10v13l-5-3.5L3 15V2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
-                </button>
-              </div>
-            </div>
-          </article>
-
-          <!-- 5. Coalfield Arts Collective -->
-          <article class="listing-card" data-region="southwest-va" data-cause="arts-culture">
-            <div class="listing-content">
-              <div class="card-tags">
-                <span class="tag">Southwest VA</span>
-                <span class="tag">Arts &amp; Culture</span>
-              </div>
-              <h3 class="listing-name">Coalfield Arts Collective</h3>
-              <p class="listing-mission">Transforming shuttered storefronts in Wise and Dickenson counties into working artist studios and community gallery space.</p>
-              <div class="listing-actions">
-                <a href="https://coalfieldarts.org" class="btn-card" target="_blank" rel="noopener noreferrer">Visit Website</a>
-                <button class="listing-bookmark" aria-label="Bookmark Coalfield Arts Collective">
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 2h10v13l-5-3.5L3 15V2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
-                </button>
-              </div>
-            </div>
-          </article>
-
-          <!-- 6. Appalachian Readers Project — EXPANDED -->
-          <article class="listing-card listing-card--expanded" data-region="southwest-va" data-cause="youth-education">
-            <div class="listing-content">
-              <div class="card-tags">
-                <span class="tag">Southwest VA</span>
-                <span class="tag">Youth &amp; Education</span>
-              </div>
-              <h3 class="listing-name">Appalachian Readers Project</h3>
-              <p class="listing-mission">Putting books into the hands of children in Buchanan, Tazewell, and Russell counties through free Little Library builds and summer reading vans.</p>
-              <div class="listing-actions">
-                <a href="https://appalachianreaders.org" class="btn-card" target="_blank" rel="noopener noreferrer">Visit Website</a>
-                <button class="listing-bookmark" aria-label="Bookmark Appalachian Readers Project">
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 2h10v13l-5-3.5L3 15V2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
-                </button>
-              </div>
-            </div>
-          </article>
-
-          <!-- 7. New River Health Navigators -->
-          <article class="listing-card" data-region="southwest-va" data-cause="health-wellness">
-            <div class="listing-content">
-              <div class="card-tags">
-                <span class="tag">Southwest VA</span>
-                <span class="tag">Health &amp; Wellness</span>
-              </div>
-              <h3 class="listing-name">New River Health Navigators</h3>
-              <p class="listing-mission">Connecting uninsured families in the New River Valley with primary care providers, prescription assistance, and preventive screenings.</p>
-              <div class="listing-actions">
-                <a href="https://newriverhealthnav.org" class="btn-card" target="_blank" rel="noopener noreferrer">Visit Website</a>
-                <button class="listing-bookmark" aria-label="Bookmark New River Health Navigators">
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 2h10v13l-5-3.5L3 15V2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
-                </button>
-              </div>
-            </div>
-          </article>
-
-          <!-- 8. Clinch River Housing Partners -->
-          <article class="listing-card" data-region="southwest-va" data-cause="housing">
-            <div class="listing-content">
-              <div class="card-tags">
-                <span class="tag">Southwest VA</span>
-                <span class="tag">Housing</span>
-              </div>
-              <h3 class="listing-name">Clinch River Housing Partners</h3>
-              <p class="listing-mission">Repairing and weatherizing homes for low-income residents along the Clinch River corridor from Richlands to St. Paul.</p>
-              <div class="listing-actions">
-                <a href="https://clinchriverhousing.org" class="btn-card" target="_blank" rel="noopener noreferrer">Visit Website</a>
-                <button class="listing-bookmark" aria-label="Bookmark Clinch River Housing Partners">
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 2h10v13l-5-3.5L3 15V2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
-                </button>
-              </div>
-            </div>
-          </article>
-
-          <!-- 9. Richmond Mutual Aid Network — EXPANDED -->
-          <article class="listing-card listing-card--expanded" data-region="central-va" data-cause="civic-community">
-            <div class="listing-content">
-              <div class="card-tags">
-                <span class="tag">Central VA</span>
-                <span class="tag">Civic &amp; Community</span>
-              </div>
-              <h3 class="listing-name">Richmond Mutual Aid Network</h3>
-              <p class="listing-mission">Coordinating neighbor-to-neighbor support across Richmond's East End — rides to appointments, grocery runs, and emergency supply distribution.</p>
-              <div class="listing-actions">
-                <a href="https://richmondmutualaid.org" class="btn-card" target="_blank" rel="noopener noreferrer">Visit Website</a>
-                <button class="listing-bookmark" aria-label="Bookmark Richmond Mutual Aid Network">
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 2h10v13l-5-3.5L3 15V2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
-                </button>
-              </div>
-            </div>
-          </article>
-
-          <!-- 10. Piedmont Youth Mentors -->
-          <article class="listing-card" data-region="central-va" data-cause="youth-education">
-            <div class="listing-content">
-              <div class="card-tags">
-                <span class="tag">Central VA</span>
-                <span class="tag">Youth &amp; Education</span>
-              </div>
-              <h3 class="listing-name">Piedmont Youth Mentors</h3>
-              <p class="listing-mission">Matching adult mentors with first-generation college-bound students in Charlottesville, Albemarle, and Fluvanna counties.</p>
-              <div class="listing-actions">
-                <a href="https://piedmontyouthmentors.org" class="btn-card" target="_blank" rel="noopener noreferrer">Visit Website</a>
-                <button class="listing-bookmark" aria-label="Bookmark Piedmont Youth Mentors">
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 2h10v13l-5-3.5L3 15V2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
-                </button>
-              </div>
-            </div>
-          </article>
-
-          <!-- 11. James River Watershed Alliance -->
-          <article class="listing-card" data-region="central-va" data-cause="environment">
-            <div class="listing-content">
-              <div class="card-tags">
-                <span class="tag">Central VA</span>
-                <span class="tag">Environment</span>
-              </div>
-              <h3 class="listing-name">James River Watershed Alliance</h3>
-              <p class="listing-mission">Organizing volunteer river cleanups and water quality monitoring along 120 miles of the James River from Lynchburg to Richmond.</p>
-              <div class="listing-actions">
-                <a href="https://jamesriveralliance.org" class="btn-card" target="_blank" rel="noopener noreferrer">Visit Website</a>
-                <button class="listing-bookmark" aria-label="Bookmark James River Watershed Alliance">
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 2h10v13l-5-3.5L3 15V2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
-                </button>
-              </div>
-            </div>
-          </article>
-
-          <!-- 12. Central Virginia Food Hub — EXPANDED -->
-          <article class="listing-card listing-card--expanded" data-region="central-va" data-cause="food-security">
-            <div class="listing-content">
-              <div class="card-tags">
-                <span class="tag">Central VA</span>
-                <span class="tag">Food Security</span>
-              </div>
-              <h3 class="listing-name">Central Virginia Food Hub</h3>
-              <p class="listing-mission">Aggregating surplus from small farms in Louisa, Goochland, and Powhatan counties and distributing to food pantries across the greater Richmond area.</p>
-              <div class="listing-actions">
-                <a href="https://centralvafoodhub.org" class="btn-card" target="_blank" rel="noopener noreferrer">Visit Website</a>
-                <button class="listing-bookmark" aria-label="Bookmark Central Virginia Food Hub">
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 2h10v13l-5-3.5L3 15V2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
-                </button>
-              </div>
-            </div>
-          </article>
-
-          <!-- 13. Loudoun Literacy Partners -->
-          <article class="listing-card" data-region="northern-va" data-cause="youth-education">
-            <div class="listing-content">
-              <div class="card-tags">
-                <span class="tag">Northern VA</span>
-                <span class="tag">Youth &amp; Education</span>
-              </div>
-              <h3 class="listing-name">Loudoun Literacy Partners</h3>
-              <p class="listing-mission">Providing free English literacy tutoring for immigrant families in Loudoun County, with evening and weekend sessions designed around working parents' schedules.</p>
-              <div class="listing-actions">
-                <a href="https://loudounliteracy.org" class="btn-card" target="_blank" rel="noopener noreferrer">Visit Website</a>
-                <button class="listing-bookmark" aria-label="Bookmark Loudoun Literacy Partners">
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 2h10v13l-5-3.5L3 15V2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
-                </button>
-              </div>
-            </div>
-          </article>
-
-          <!-- 14. Fairfax Veterans Transition Center -->
-          <article class="listing-card" data-region="northern-va" data-cause="veterans">
-            <div class="listing-content">
-              <div class="card-tags">
-                <span class="tag">Northern VA</span>
-                <span class="tag">Veterans</span>
-              </div>
-              <h3 class="listing-name">Fairfax Veterans Transition Center</h3>
-              <p class="listing-mission">Offering transitional housing and career coaching for veterans moving from active duty to civilian life in the Fairfax County corridor.</p>
-              <div class="listing-actions">
-                <a href="https://fairfaxvetscenter.org" class="btn-card" target="_blank" rel="noopener noreferrer">Visit Website</a>
-                <button class="listing-bookmark" aria-label="Bookmark Fairfax Veterans Transition Center">
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 2h10v13l-5-3.5L3 15V2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
-                </button>
-              </div>
-            </div>
-          </article>
-
-          <!-- 15. Arlington Neighbors Together — EXPANDED -->
-          <article class="listing-card listing-card--expanded" data-region="northern-va" data-cause="housing">
-            <div class="listing-content">
-              <div class="card-tags">
-                <span class="tag">Northern VA</span>
-                <span class="tag">Housing</span>
-              </div>
-              <h3 class="listing-name">Arlington Neighbors Together</h3>
-              <p class="listing-mission">Preventing evictions in Arlington and Alexandria through emergency rental assistance, landlord mediation, and financial counseling.</p>
-              <div class="listing-actions">
-                <a href="https://arlingtonneighbors.org" class="btn-card" target="_blank" rel="noopener noreferrer">Visit Website</a>
-                <button class="listing-bookmark" aria-label="Bookmark Arlington Neighbors Together">
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 2h10v13l-5-3.5L3 15V2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
-                </button>
-              </div>
-            </div>
-          </article>
-
-          <!-- 16. Northern Virginia Faith Pantry -->
-          <article class="listing-card" data-region="northern-va" data-cause="faith-based">
-            <div class="listing-content">
-              <div class="card-tags">
-                <span class="tag">Northern VA</span>
-                <span class="tag">Faith-Based</span>
-              </div>
-              <h3 class="listing-name">Northern Virginia Faith Pantry</h3>
-              <p class="listing-mission">Uniting 23 congregations across Prince William and Manassas to operate a shared food pantry serving 400 families every week.</p>
-              <div class="listing-actions">
-                <a href="https://novafaithpantry.org" class="btn-card" target="_blank" rel="noopener noreferrer">Visit Website</a>
-                <button class="listing-bookmark" aria-label="Bookmark Northern Virginia Faith Pantry">
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 2h10v13l-5-3.5L3 15V2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
-                </button>
-              </div>
-            </div>
-          </article>
-
-          <!-- 17. Tidewater Animal Rescue League -->
-          <article class="listing-card" data-region="hampton-roads" data-cause="animal-welfare">
-            <div class="listing-content">
-              <div class="card-tags">
-                <span class="tag">Hampton Roads</span>
-                <span class="tag">Animal Welfare</span>
-              </div>
-              <h3 class="listing-name">Tidewater Animal Rescue League</h3>
-              <p class="listing-mission">Rescuing, rehabilitating, and rehoming abandoned animals across Norfolk, Virginia Beach, and the Eastern Shore since 2008.</p>
-              <div class="listing-actions">
-                <a href="https://tidewateranimalrescue.org" class="btn-card" target="_blank" rel="noopener noreferrer">Visit Website</a>
-                <button class="listing-bookmark" aria-label="Bookmark Tidewater Animal Rescue League">
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 2h10v13l-5-3.5L3 15V2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
-                </button>
-              </div>
-            </div>
-          </article>
-
-          <!-- 18. Hampton Roads Civic Corps — EXPANDED -->
-          <article class="listing-card listing-card--expanded" data-region="hampton-roads" data-cause="civic-community">
-            <div class="listing-content">
-              <div class="card-tags">
-                <span class="tag">Hampton Roads</span>
-                <span class="tag">Civic &amp; Community</span>
-              </div>
-              <h3 class="listing-name">Hampton Roads Civic Corps</h3>
-              <p class="listing-mission">Training young adults ages 18-25 in civic leadership, voter registration drives, and community organizing across the seven cities.</p>
-              <div class="listing-actions">
-                <a href="https://hrcorps.org" class="btn-card" target="_blank" rel="noopener noreferrer">Visit Website</a>
-                <button class="listing-bookmark" aria-label="Bookmark Hampton Roads Civic Corps">
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 2h10v13l-5-3.5L3 15V2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
-                </button>
-              </div>
-            </div>
-          </article>
-
-          <!-- 19. Chesapeake Bay Youth Sailing -->
-          <article class="listing-card" data-region="hampton-roads" data-cause="youth-education">
-            <div class="listing-content">
-              <div class="card-tags">
-                <span class="tag">Hampton Roads</span>
-                <span class="tag">Youth &amp; Education</span>
-              </div>
-              <h3 class="listing-name">Chesapeake Bay Youth Sailing</h3>
-              <p class="listing-mission">Teaching sailing and marine science to underserved middle-schoolers on the Chesapeake Bay through a free summer academy in Norfolk.</p>
-              <div class="listing-actions">
-                <a href="https://bayyouthsailing.org" class="btn-card" target="_blank" rel="noopener noreferrer">Visit Website</a>
-                <button class="listing-bookmark" aria-label="Bookmark Chesapeake Bay Youth Sailing">
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 2h10v13l-5-3.5L3 15V2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
-                </button>
-              </div>
-            </div>
-          </article>
-
-          <!-- 20. Peninsula Health Collective -->
-          <article class="listing-card" data-region="hampton-roads" data-cause="health-wellness">
-            <div class="listing-content">
-              <div class="card-tags">
-                <span class="tag">Hampton Roads</span>
-                <span class="tag">Health &amp; Wellness</span>
-              </div>
-              <h3 class="listing-name">Peninsula Health Collective</h3>
-              <p class="listing-mission">Operating free weekend clinics in Newport News and Hampton for residents without health insurance, staffed by volunteer physicians and nurses.</p>
-              <div class="listing-actions">
-                <a href="https://peninsulahealthcollective.org" class="btn-card" target="_blank" rel="noopener noreferrer">Visit Website</a>
-                <button class="listing-bookmark" aria-label="Bookmark Peninsula Health Collective">
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 2h10v13l-5-3.5L3 15V2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
-                </button>
-              </div>
-            </div>
-          </article>
-
-          <!-- 21. Dan River Farms to Families — EXPANDED -->
-          <article class="listing-card listing-card--expanded" data-region="southside-va" data-cause="food-security">
-            <div class="listing-content">
-              <div class="card-tags">
-                <span class="tag">Southside VA</span>
-                <span class="tag">Food Security</span>
-              </div>
-              <h3 class="listing-name">Dan River Farms to Families</h3>
-              <p class="listing-mission">Gleaning surplus from tobacco-turned-produce farms along the Dan River and delivering fresh food boxes to families in Pittsylvania and Halifax counties.</p>
-              <div class="listing-actions">
-                <a href="https://danriverfarms.org" class="btn-card" target="_blank" rel="noopener noreferrer">Visit Website</a>
-                <button class="listing-bookmark" aria-label="Bookmark Dan River Farms to Families">
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 2h10v13l-5-3.5L3 15V2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
-                </button>
-              </div>
-            </div>
-          </article>
-
-          <!-- 22. Southside Animal Haven -->
-          <article class="listing-card" data-region="southside-va" data-cause="animal-welfare">
-            <div class="listing-content">
-              <div class="card-tags">
-                <span class="tag">Southside VA</span>
-                <span class="tag">Animal Welfare</span>
-              </div>
-              <h3 class="listing-name">Southside Animal Haven</h3>
-              <p class="listing-mission">Providing low-cost spay, neuter, and veterinary care in Danville and surrounding counties where the nearest vet clinic is an hour's drive.</p>
-              <div class="listing-actions">
-                <a href="https://southsidehavenva.org" class="btn-card" target="_blank" rel="noopener noreferrer">Visit Website</a>
-                <button class="listing-bookmark" aria-label="Bookmark Southside Animal Haven">
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 2h10v13l-5-3.5L3 15V2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
-                </button>
-              </div>
-            </div>
-          </article>
-
-          <!-- 23. Martinsville Makers Guild -->
-          <article class="listing-card" data-region="southside-va" data-cause="arts-culture">
-            <div class="listing-content">
-              <div class="card-tags">
-                <span class="tag">Southside VA</span>
-                <span class="tag">Arts &amp; Culture</span>
-              </div>
-              <h3 class="listing-name">Martinsville Makers Guild</h3>
-              <p class="listing-mission">Preserving Southside Virginia's furniture-making heritage through free woodworking apprenticeships for young adults in Henry and Patrick counties.</p>
-              <div class="listing-actions">
-                <a href="https://martinsvillemakers.org" class="btn-card" target="_blank" rel="noopener noreferrer">Visit Website</a>
-                <button class="listing-bookmark" aria-label="Bookmark Martinsville Makers Guild">
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 2h10v13l-5-3.5L3 15V2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
-                </button>
-              </div>
-            </div>
-          </article>
-
-          <!-- 24. Lake Country Veterans Fellowship — EXPANDED -->
-          <article class="listing-card listing-card--expanded" data-region="southside-va" data-cause="veterans">
-            <div class="listing-content">
-              <div class="card-tags">
-                <span class="tag">Southside VA</span>
-                <span class="tag">Veterans</span>
-              </div>
-              <h3 class="listing-name">Lake Country Veterans Fellowship</h3>
-              <p class="listing-mission">Running peer support groups and outdoor recreation programs for veterans in the Kerr Lake and Buggs Island region of Southside Virginia.</p>
-              <div class="listing-actions">
-                <a href="https://lakecountryvets.org" class="btn-card" target="_blank" rel="noopener noreferrer">Visit Website</a>
-                <button class="listing-bookmark" aria-label="Bookmark Lake Country Veterans Fellowship">
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 2h10v13l-5-3.5L3 15V2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
-                </button>
-              </div>
-            </div>
-          </article>
-
+        <!-- Error state -->
+        <div class="listings-error" data-listings-error style="display: none;">
+          <p class="listings-error-text">Something went wrong loading the directory. Please try again.</p>
+          <button class="btn-primary" data-error-retry>Retry</button>
         </div>
 
         <!-- Empty state -->
@@ -512,3 +147,4 @@
 
       </div>
     </section>
+</div>

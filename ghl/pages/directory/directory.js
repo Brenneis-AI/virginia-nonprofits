@@ -2,160 +2,265 @@
 /* ==========================================================================
    File: page.js
    Page: Directory
-   Section: Filtering search pagination and URL query parameter support
-   Last Updated: 2026-03-27
+   Section: Supabase-powered filtering, search, pagination, and URL query support
+   Last Updated: 2026-03-28
    ========================================================================== */
 
 function init() {
   'use strict';
 
   /* ========================================================================
+     Supabase Client
+     ======================================================================== */
+
+  var SUPABASE_URL = 'https://irhpxfilazawsweqqymw.supabase.co';
+  var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlyaHB4ZmlsYXphd3N3ZXFxeW13Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ3MTA1MzEsImV4cCI6MjA5MDI4NjUzMX0.mxUxkPrp_TY_TraB4NN-i3DJWfXLd1RmXEuB5aQt4GE';
+
+  var sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+  /* ========================================================================
+     Label Lookup Maps
+     ======================================================================== */
+
+  var REGION_LABELS = {
+    'shenandoah-valley': 'Shenandoah Valley',
+    'southwest-va': 'Southwest VA',
+    'central-va': 'Central VA',
+    'northern-va': 'Northern VA',
+    'hampton-roads': 'Hampton Roads',
+    'southside-va': 'Southside VA'
+  };
+
+  var CAUSE_LABELS = {
+    'youth-education': 'Youth & Education',
+    'food-security': 'Food Security',
+    'housing': 'Housing',
+    'arts-culture': 'Arts & Culture',
+    'veterans': 'Veterans',
+    'health-wellness': 'Health & Wellness',
+    'environment': 'Environment',
+    'animal-welfare': 'Animal Welfare',
+    'faith-based': 'Faith-Based',
+    'civic-community': 'Civic & Community',
+    'sports-recreation': 'Sports & Recreation'
+  };
+
+  /* ========================================================================
      DOM References
      ======================================================================== */
 
-  const searchInput = document.querySelector('[data-search]');
-  const regionRow = document.querySelector('[data-filter-region]');
-  const causeRow = document.querySelector('[data-filter-cause]');
-  const filterCount = document.querySelector('[data-filter-count]');
-  const clearBtn = document.querySelector('[data-filter-clear]');
-  const clearAllBtn = document.querySelector('[data-filter-clear-all]');
-  const listingsGrid = document.querySelector('[data-listings-grid]');
-  const emptyState = document.querySelector('[data-listings-empty]');
-  const pagination = document.querySelector('[data-pagination]');
-  const pageNumbersContainer = document.querySelector('[data-page-numbers]');
-  const prevBtn = document.querySelector('[data-page-prev]');
-  const nextBtn = document.querySelector('[data-page-next]');
-  const stickyFilter = document.querySelector('[data-sticky-filter]');
+  var searchInput = document.querySelector('[data-search]');
+  var regionRow = document.querySelector('[data-filter-region]');
+  var causeRow = document.querySelector('[data-filter-cause]');
+  var filterCount = document.querySelector('[data-filter-count]');
+  var clearBtn = document.querySelector('[data-filter-clear]');
+  var clearAllBtn = document.querySelector('[data-filter-clear-all]');
+  var listingsGrid = document.querySelector('[data-listings-grid]');
+  var emptyState = document.querySelector('[data-listings-empty]');
+  var errorState = document.querySelector('[data-listings-error]');
+  var retryBtn = document.querySelector('[data-error-retry]');
+  var pagination = document.querySelector('[data-pagination]');
+  var pageNumbersContainer = document.querySelector('[data-page-numbers]');
+  var prevBtn = document.querySelector('[data-page-prev]');
+  var nextBtn = document.querySelector('[data-page-next]');
+  var stickyFilter = document.querySelector('[data-sticky-filter]');
 
-  const allCards = Array.from(listingsGrid.querySelectorAll('.listing-card'));
-  const regionPills = Array.from(regionRow.querySelectorAll('[data-region]'));
-  const causePills = Array.from(causeRow.querySelectorAll('[data-cause]'));
+  var regionPills = Array.from(regionRow.querySelectorAll('[data-region]'));
+  var causePills = Array.from(causeRow.querySelectorAll('[data-cause]'));
 
   /* ========================================================================
      State
      ======================================================================== */
 
-  const ITEMS_PER_PAGE = 12;
-  const DEBOUNCE_MS = 200;
+  var ITEMS_PER_PAGE = 12;
+  var DEBOUNCE_MS = 300;
 
-  let activeRegion = 'all';
-  let activeCauses = new Set();
-  let searchTerm = '';
-  let currentPage = 1;
-  let filteredCards = []; // cards matching current filters (in DOM order)
+  var activeRegion = 'all';
+  var activeCauses = new Set();
+  var searchTerm = '';
+  var currentPage = 1;
+  var totalCount = 0;
+  var isLoading = false;
 
   /* ========================================================================
-     Filtering Logic
+     Supabase Fetch
      ======================================================================== */
 
-  /**
-   * Determine which cards match the current region, cause, and search filters.
-   * Returns an array of matching card elements in DOM order.
-   */
-  function getFilteredCards() {
-    return allCards.filter(function (card) {
-      // Region check
-      const cardRegion = card.getAttribute('data-region');
-      if (activeRegion !== 'all' && cardRegion !== activeRegion) return false;
+  function fetchListings() {
+    if (isLoading) return;
+    isLoading = true;
+    showSkeleton();
 
-      // Cause check — if any cause pills are active, card must match one of them
-      if (activeCauses.size > 0) {
-        const cardCause = card.getAttribute('data-cause');
-        if (!activeCauses.has(cardCause)) return false;
+    var start = (currentPage - 1) * ITEMS_PER_PAGE;
+    var end = start + ITEMS_PER_PAGE - 1;
+
+    var query = sb
+      .from('nonprofits')
+      .select('*', { count: 'exact' })
+      .eq('status', 'active');
+
+    if (activeRegion !== 'all') {
+      query = query.eq('region', activeRegion);
+    }
+
+    if (activeCauses.size > 0) {
+      query = query.in('cause_primary', Array.from(activeCauses));
+    }
+
+    if (searchTerm) {
+      query = query.or('name.ilike.%' + searchTerm + '%,mission_short.ilike.%' + searchTerm + '%');
+    }
+
+    query = query
+      .order('featured', { ascending: false })
+      .order('name', { ascending: true })
+      .range(start, end);
+
+    query.then(function (result) {
+      isLoading = false;
+
+      if (result.error) {
+        showError();
+        return;
       }
 
-      // Search check — match against org name and mission text
-      if (searchTerm) {
-        const name = card.querySelector('.listing-name');
-        const mission = card.querySelector('.listing-mission');
-        const text = ((name ? name.textContent : '') + ' ' + (mission ? mission.textContent : '')).toLowerCase();
-        if (text.indexOf(searchTerm) === -1) return false;
-      }
-
-      return true;
+      totalCount = result.count || 0;
+      renderCards(result.data || []);
+      renderPagination();
+      updateCount();
     });
   }
 
   /* ========================================================================
-     Rendering — Show/Hide Cards + Pagination
+     Card Rendering
      ======================================================================== */
 
-  /**
-   * Main render function. Call after any filter, search, or page change.
-   */
-  function render() {
-    filteredCards = getFilteredCards();
-    const totalResults = filteredCards.length;
-    const totalPages = Math.max(1, Math.ceil(totalResults / ITEMS_PER_PAGE));
+  function renderCard(item) {
+    var regionLabel = REGION_LABELS[item.region] || item.region;
+    var causeLabel = CAUSE_LABELS[item.cause_primary] || item.cause_primary;
+    var expandedClass = item.featured ? ' listing-card--expanded' : '';
 
-    // Clamp current page
-    if (currentPage > totalPages) currentPage = totalPages;
-
-    const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-    const endIndex = startIndex + ITEMS_PER_PAGE;
-
-    // Build a Set of cards visible on the current page
-    const visibleSet = new Set(filteredCards.slice(startIndex, endIndex));
-
-    // Show/hide each card
-    allCards.forEach(function (card) {
-      if (visibleSet.has(card)) {
-        card.classList.remove('is-hidden');
-      } else {
-        card.classList.add('is-hidden');
-      }
-    });
-
-    // Update results count
-    filterCount.textContent = 'Showing ' + totalResults + ' nonprofit' + (totalResults !== 1 ? 's' : '');
-
-    // Empty state
-    if (totalResults === 0) {
-      emptyState.style.display = '';
-      listingsGrid.style.display = 'none';
-      pagination.style.display = 'none';
-    } else {
-      emptyState.style.display = 'none';
-      listingsGrid.style.display = '';
-      pagination.style.display = totalPages <= 1 ? 'none' : '';
+    var websiteLink = '';
+    if (item.website_url) {
+      websiteLink = '<a href="' + escapeAttr(item.website_url) + '" class="btn-card" target="_blank" rel="noopener noreferrer">Visit Website</a>';
     }
 
-    // Render pagination buttons
-    renderPagination(totalPages);
+    return '<article class="listing-card' + expandedClass + '" data-region="' + escapeAttr(item.region) + '" data-cause="' + escapeAttr(item.cause_primary) + '">' +
+      '<div class="listing-content">' +
+        '<div class="card-tags">' +
+          '<span class="tag">' + escapeHtml(regionLabel) + '</span>' +
+          '<span class="tag">' + escapeHtml(causeLabel) + '</span>' +
+        '</div>' +
+        '<h3 class="listing-name">' + escapeHtml(item.name) + '</h3>' +
+        '<p class="listing-mission">' + escapeHtml(item.mission_short || '') + '</p>' +
+        '<div class="listing-actions">' +
+          websiteLink +
+          '<button class="listing-bookmark" aria-label="Bookmark ' + escapeAttr(item.name) + '">' +
+            '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 2h10v13l-5-3.5L3 15V2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>' +
+          '</button>' +
+        '</div>' +
+      '</div>' +
+    '</article>';
+  }
+
+  function renderCards(data) {
+    if (data.length === 0) {
+      listingsGrid.style.display = 'none';
+      listingsGrid.innerHTML = '';
+      emptyState.style.display = '';
+      errorState.style.display = 'none';
+      pagination.style.display = 'none';
+      return;
+    }
+
+    emptyState.style.display = 'none';
+    errorState.style.display = 'none';
+    listingsGrid.style.display = '';
+
+    var html = '';
+    for (var i = 0; i < data.length; i++) {
+      html += renderCard(data[i]);
+    }
+    listingsGrid.innerHTML = html;
+  }
+
+  /* ========================================================================
+     Skeleton / Error States
+     ======================================================================== */
+
+  var skeletonHTML = '';
+  (function () {
+    var card = '<article class="listing-card skeleton-card" aria-hidden="true">' +
+      '<div class="listing-content">' +
+        '<div class="card-tags"><span class="skeleton-line skeleton-tag"></span><span class="skeleton-line skeleton-tag"></span></div>' +
+        '<div class="skeleton-line skeleton-title"></div>' +
+        '<div class="skeleton-line skeleton-text"></div>' +
+        '<div class="skeleton-line skeleton-text skeleton-text--short"></div>' +
+        '<div class="skeleton-line skeleton-action"></div>' +
+      '</div>' +
+    '</article>';
+    for (var i = 0; i < 6; i++) skeletonHTML += card;
+  })();
+
+  function showSkeleton() {
+    listingsGrid.innerHTML = skeletonHTML;
+    listingsGrid.style.display = '';
+    emptyState.style.display = 'none';
+    errorState.style.display = 'none';
+    pagination.style.display = 'none';
+  }
+
+  function showError() {
+    listingsGrid.style.display = 'none';
+    listingsGrid.innerHTML = '';
+    emptyState.style.display = 'none';
+    errorState.style.display = '';
+    pagination.style.display = 'none';
+    filterCount.textContent = '';
   }
 
   /* ========================================================================
      Pagination Controls
      ======================================================================== */
 
-  function renderPagination(totalPages) {
-    // Clear existing page number buttons
+  function renderPagination() {
+    var totalPages = Math.max(1, Math.ceil(totalCount / ITEMS_PER_PAGE));
+
+    if (totalPages <= 1) {
+      pagination.style.display = 'none';
+      return;
+    }
+
+    pagination.style.display = '';
     pageNumbersContainer.innerHTML = '';
 
-    for (let i = 1; i <= totalPages; i++) {
-      const btn = document.createElement('button');
+    for (var i = 1; i <= totalPages; i++) {
+      var btn = document.createElement('button');
       btn.className = 'pagination-page' + (i === currentPage ? ' is-active' : '');
       btn.setAttribute('data-page', i);
       btn.textContent = i;
-      btn.addEventListener('click', function () {
-        goToPage(i);
-      });
+      btn.addEventListener('click', (function (page) {
+        return function () { goToPage(page); };
+      })(i));
       pageNumbersContainer.appendChild(btn);
     }
 
-    // Prev / Next state
     prevBtn.disabled = currentPage <= 1;
     nextBtn.disabled = currentPage >= totalPages;
   }
 
+  function updateCount() {
+    filterCount.textContent = 'Showing ' + totalCount + ' nonprofit' + (totalCount !== 1 ? 's' : '');
+  }
+
   function goToPage(page) {
     currentPage = page;
-    render();
+    fetchListings();
     scrollToListings();
   }
 
   function scrollToListings() {
-    const target = stickyFilter || listingsGrid;
+    var target = stickyFilter || listingsGrid;
     if (target) {
       target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
@@ -165,33 +270,24 @@ function init() {
      Pill Click Handlers
      ======================================================================== */
 
-  /**
-   * Region pills — single-select. Clicking the already-active pill does nothing
-   * (it stays active). "All Regions" is the default.
-   */
   regionRow.addEventListener('click', function (e) {
-    const pill = e.target.closest('[data-region]');
+    var pill = e.target.closest('[data-region]');
     if (!pill || pill.classList.contains('is-active')) return;
 
-    // Deactivate all region pills, activate clicked one
     regionPills.forEach(function (p) { p.classList.remove('is-active'); });
     pill.classList.add('is-active');
 
     activeRegion = pill.getAttribute('data-region');
     currentPage = 1;
     updateURL();
-    render();
+    fetchListings();
   });
 
-  /**
-   * Cause pills — toggle (multi-select). Deselecting all shows everything.
-   * No "All Causes" pill exists in the HTML.
-   */
   causeRow.addEventListener('click', function (e) {
-    const pill = e.target.closest('[data-cause]');
+    var pill = e.target.closest('[data-cause]');
     if (!pill) return;
 
-    const cause = pill.getAttribute('data-cause');
+    var cause = pill.getAttribute('data-cause');
 
     if (pill.classList.contains('is-active')) {
       pill.classList.remove('is-active');
@@ -203,21 +299,21 @@ function init() {
 
     currentPage = 1;
     updateURL();
-    render();
+    fetchListings();
   });
 
   /* ========================================================================
      Text Search with Debounce
      ======================================================================== */
 
-  let searchTimer = null;
+  var searchTimer = null;
 
   searchInput.addEventListener('input', function () {
     clearTimeout(searchTimer);
     searchTimer = setTimeout(function () {
       searchTerm = searchInput.value.trim().toLowerCase();
       currentPage = 1;
-      render();
+      fetchListings();
     }, DEBOUNCE_MS);
   });
 
@@ -226,25 +322,20 @@ function init() {
      ======================================================================== */
 
   function clearAllFilters() {
-    // Reset region to "All Regions"
     regionPills.forEach(function (p) { p.classList.remove('is-active'); });
-    const allRegionPill = regionRow.querySelector('[data-region="all"]');
+    var allRegionPill = regionRow.querySelector('[data-region="all"]');
     if (allRegionPill) allRegionPill.classList.add('is-active');
     activeRegion = 'all';
 
-    // Reset causes
     causePills.forEach(function (p) { p.classList.remove('is-active'); });
     activeCauses.clear();
 
-    // Reset search
     searchInput.value = '';
     searchTerm = '';
-
-    // Reset page
     currentPage = 1;
 
     updateURL();
-    render();
+    fetchListings();
   }
 
   if (clearBtn) clearBtn.addEventListener('click', clearAllFilters);
@@ -259,25 +350,30 @@ function init() {
   });
 
   nextBtn.addEventListener('click', function () {
-    const totalPages = Math.max(1, Math.ceil(filteredCards.length / ITEMS_PER_PAGE));
+    var totalPages = Math.max(1, Math.ceil(totalCount / ITEMS_PER_PAGE));
     if (currentPage < totalPages) goToPage(currentPage + 1);
   });
+
+  /* ========================================================================
+     Retry Button
+     ======================================================================== */
+
+  if (retryBtn) {
+    retryBtn.addEventListener('click', function () {
+      fetchListings();
+    });
+  }
 
   /* ========================================================================
      URL Query Parameter Support
      ======================================================================== */
 
-  /**
-   * Read ?region= and ?cause= from the URL on page load and pre-select
-   * the corresponding pills.
-   */
   function readURL() {
-    const params = new URLSearchParams(window.location.search);
+    var params = new URLSearchParams(window.location.search);
 
-    // Region
-    const regionParam = params.get('region');
+    var regionParam = params.get('region');
     if (regionParam) {
-      const pill = regionRow.querySelector('[data-region="' + regionParam + '"]');
+      var pill = regionRow.querySelector('[data-region="' + regionParam + '"]');
       if (pill) {
         regionPills.forEach(function (p) { p.classList.remove('is-active'); });
         pill.classList.add('is-active');
@@ -285,12 +381,11 @@ function init() {
       }
     }
 
-    // Cause — supports comma-separated for multiple causes
-    const causeParam = params.get('cause');
+    var causeParam = params.get('cause');
     if (causeParam) {
-      const causes = causeParam.split(',');
+      var causes = causeParam.split(',');
       causes.forEach(function (c) {
-        const pill = causeRow.querySelector('[data-cause="' + c.trim() + '"]');
+        var pill = causeRow.querySelector('[data-cause="' + c.trim() + '"]');
         if (pill) {
           pill.classList.add('is-active');
           activeCauses.add(c.trim());
@@ -298,19 +393,15 @@ function init() {
       });
     }
 
-    // Search
-    const searchParam = params.get('q');
+    var searchParam = params.get('q');
     if (searchParam) {
       searchInput.value = searchParam;
       searchTerm = searchParam.trim().toLowerCase();
     }
   }
 
-  /**
-   * Update URL query params to reflect current filter state without page reload.
-   */
   function updateURL() {
-    const params = new URLSearchParams();
+    var params = new URLSearchParams();
 
     if (activeRegion !== 'all') {
       params.set('region', activeRegion);
@@ -320,8 +411,8 @@ function init() {
       params.set('cause', Array.from(activeCauses).join(','));
     }
 
-    const queryString = params.toString();
-    const newURL = window.location.pathname + (queryString ? '?' + queryString : '');
+    var queryString = params.toString();
+    var newURL = window.location.pathname + (queryString ? '?' + queryString : '');
 
     history.pushState(null, '', newURL);
   }
@@ -331,7 +422,7 @@ function init() {
      ======================================================================== */
 
   if (stickyFilter) {
-    let ticking = false;
+    var ticking = false;
     window.addEventListener('scroll', function () {
       if (!ticking) {
         window.requestAnimationFrame(function () {
@@ -352,28 +443,40 @@ function init() {
      ======================================================================== */
 
   window.addEventListener('popstate', function () {
-    // Reset state
     activeRegion = 'all';
     activeCauses.clear();
     searchTerm = '';
     searchInput.value = '';
     regionPills.forEach(function (p) { p.classList.remove('is-active'); });
-    const allRegionPill = regionRow.querySelector('[data-region="all"]');
+    var allRegionPill = regionRow.querySelector('[data-region="all"]');
     if (allRegionPill) allRegionPill.classList.add('is-active');
     causePills.forEach(function (p) { p.classList.remove('is-active'); });
 
-    // Re-read URL and render
     readURL();
     currentPage = 1;
-    render();
+    fetchListings();
   });
+
+  /* ========================================================================
+     Utility — HTML/Attribute Escaping
+     ======================================================================== */
+
+  function escapeHtml(str) {
+    var div = document.createElement('div');
+    div.appendChild(document.createTextNode(str));
+    return div.innerHTML;
+  }
+
+  function escapeAttr(str) {
+    return str.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/'/g, '&#39;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
 
   /* ========================================================================
      Initialize
      ======================================================================== */
 
   readURL();
-  render();
+  fetchListings();
 }
 
 /* ========================================================================

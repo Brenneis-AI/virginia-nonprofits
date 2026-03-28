@@ -1,123 +1,233 @@
 /*
   File: home.css
   Page: Home
-  Section: Combined styles � paste into GHL Home step Custom CSS
-  Last Updated: 2026-03-27
+  Section: Self-contained styles — paste into GHL Home step Custom CSS
+  Last Updated: 2026-03-28
 */
 
-/* === Shared Component Styles === */
+/* Google Fonts — Dual-Serif System */
+@import url('https://fonts.googleapis.com/css2?family=Newsreader:wght@400;500&family=Noto+Serif:wght@400;700&display=swap');
 
-/* ---------- Typography Base ---------- */
+/* ==========================================================================
+   Brand Tokens
+   ========================================================================== */
 
-h1, h2, h3, h4, h5, h6 {
+:root {
+  /* Colors */
+  --color-primary: #012d1d;
+  --color-primary-container: #1b4332;
+  --color-secondary: #755b00;
+  --color-secondary-display: #c9a84c;
+  --color-background: #fbf9f3;
+  --color-surface-container: #f0eee8;
+  --color-surface-container-low: #f6f3ed;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-highest: #e4e2dc;
+  --color-on-primary: #ffffff;
+  --color-on-primary-container: #86af99;
+  --color-on-surface: #1b1c18;
+  --color-outline-variant: #c1c8c2;
+
+  /* RGB Companions */
+  --color-primary-rgb: 1, 45, 29;
+  --color-primary-container-rgb: 27, 67, 50;
+  --color-secondary-rgb: 117, 91, 0;
+  --color-secondary-display-rgb: 201, 168, 76;
+  --color-background-rgb: 251, 249, 243;
+  --color-on-primary-rgb: 255, 255, 255;
+  --color-on-surface-rgb: 27, 28, 24;
+
+  /* Utility Colors */
+  --color-text-muted: #5a5c56;
+  --color-text-lighter: #7a7c76;
+
+  /* Gradients */
+  --hero-gradient: linear-gradient(135deg, var(--color-primary), var(--color-primary-container));
+  --gradient-primary: linear-gradient(135deg, var(--color-primary), var(--color-primary-container));
+  --grain-opacity: 0.03;
+
+  /* Typography — Families */
+  --font-display: 'Noto Serif', serif;
+  --font-body: 'Newsreader', serif;
+
+  /* Typography — Sizes (mobile-first) */
+  --text-display: 2.25rem;
+  --text-h1: 2.25rem;
+  --text-h2: 1.5rem;
+  --text-h3: 1.25rem;
+  --text-body: 1rem;
+  --text-small: 0.875rem;
+  --text-label: 0.75rem;
+
+  /* Typography — Weights */
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-bold: 700;
+
+  /* Typography — Line Heights */
+  --leading-display: 1.1;
+  --leading-headline: 1.2;
+  --leading-title: 1.3;
+  --leading-body: 1.6;
+  --leading-small: 1.5;
+  --leading-label: 1.4;
+
+  /* Typography — Letter Spacing */
+  --tracking-display: -0.02em;
+  --tracking-headline: -0.01em;
+  --tracking-label: 0.02em;
+
+  /* Spacing Scale */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 3rem;
+
+  /* Layout */
+  --container-max: 72rem;
+  --container-padding: var(--space-md);
+
+  /* Radius */
+  --radius-default: 0.25rem;
+
+  /* Shadows */
+  --shadow-ambient: 0 4px 24px rgba(27, 28, 24, 0.04);
+
+  /* Transitions */
+  --transition-fast: 200ms ease-out;
+  --transition-base: 300ms ease-out;
+  --transition-hover: transform 200ms ease-out, box-shadow 200ms ease-out;
+
+  /* Z-Index */
+  --z-base: 0;
+  --z-card: 1;
+
+  /* Cause-Category Surface Colors */
+  --color-cause-youth-education: rgba(1, 45, 29, 0.15);
+  --color-cause-food-security: rgba(201, 168, 76, 0.12);
+  --color-cause-housing: rgba(27, 67, 50, 0.12);
+  --color-cause-arts-culture: rgba(117, 91, 0, 0.10);
+  --color-cause-veterans: rgba(1, 45, 29, 0.20);
+  --color-cause-health-wellness: rgba(134, 175, 153, 0.15);
+  --color-cause-environment-start: rgba(1, 45, 29, 0.10);
+  --color-cause-environment-end: rgba(27, 67, 50, 0.10);
+  --color-cause-animal-welfare: rgba(1, 45, 29, 0.03);
+  --color-cause-faith-based: rgba(201, 168, 76, 0.08);
+  --color-cause-civic-community: rgba(27, 67, 50, 0.10);
+}
+
+@media (min-width: 769px) {
+  :root {
+    --text-display: 3.5rem;
+    --text-h1: 3.5rem;
+    --text-h2: 2rem;
+    --text-h3: 1.25rem;
+    --space-3xl: 5rem;
+    --container-padding: var(--space-xl);
+  }
+}
+
+/* ==========================================================================
+   Reset
+   ========================================================================== */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  color: var(--color-on-surface);
+  background-color: var(--color-background);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+
+/* ==========================================================================
+   Container
+   ========================================================================== */
+
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--container-padding);
+  padding-right: var(--container-padding);
+}
+
+/* ==========================================================================
+   Typography Base
+   ========================================================================== */
+
+.vn-content h1, .vn-content h2, .vn-content h3 {
   font-family: var(--font-display);
   font-weight: var(--weight-bold);
+  line-height: var(--leading-headline);
   color: var(--color-on-surface);
 }
 
-h1 {
-  font-size: var(--text-h1);
-  line-height: var(--leading-display);
-  letter-spacing: var(--tracking-display);
-}
-
-h2 {
-  font-size: var(--text-h2);
-  line-height: var(--leading-headline);
-  letter-spacing: var(--tracking-headline);
-}
-
-h3 {
-  font-size: var(--text-h3);
-  line-height: var(--leading-title);
-  letter-spacing: var(--tracking-normal);
-}
-
-p {
+.vn-content p {
+  font-family: var(--font-body);
   margin-bottom: var(--space-md);
 }
 
-p:last-child {
-  margin-bottom: 0;
+.vn-content p:last-child { margin-bottom: 0; }
+
+.vn-content a {
+  color: var(--color-secondary-display);
+  text-decoration: underline;
+  text-decoration-color: var(--color-secondary-display);
+  text-underline-offset: 0.15em;
+  transition: color var(--transition-fast);
 }
 
-.text-small {
-  font-size: var(--text-small);
-  line-height: var(--leading-small);
-}
+.vn-content a:hover { color: var(--color-secondary); }
 
 .text-label {
+  font-family: var(--font-body);
   font-size: var(--text-label);
   font-weight: var(--weight-medium);
-  line-height: var(--leading-label);
   letter-spacing: var(--tracking-label);
+  line-height: var(--leading-label);
 }
 
-.text-muted {
-  color: var(--color-text-muted);
-}
-
-.text-lighter {
-  color: var(--color-text-lighter);
-}
 /* ==========================================================================
-   Grain Texture Overlay
+   Grain Overlay
    ========================================================================== */
 
-.grain-overlay {
-  position: relative;
-}
+.grain-overlay { position: relative; }
 
 .grain-overlay::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  top: 0; left: 0; right: 0; bottom: 0;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
   opacity: var(--grain-opacity);
   pointer-events: none;
-  z-index: 1;
+  z-index: 0;
 }
 
-.grain-overlay > * {
-  position: relative;
-  z-index: 2;
-}
+.grain-overlay > * { position: relative; z-index: 1; }
 
 /* ==========================================================================
-   Surface Tier Utilities
+   Section Animate
    ========================================================================== */
 
-.surface-background {
-  background-color: var(--color-background);
+.section-animate {
+  opacity: 0;
+  transform: translateY(1.5rem);
+  transition: opacity 600ms ease-out, transform 600ms ease-out;
 }
 
-.surface-container {
-  background-color: var(--color-surface-container);
-}
-
-.surface-container-low {
-  background-color: var(--color-surface-container-low);
-}
-
-.surface-container-lowest {
-  background-color: var(--color-surface-container-lowest);
-}
-
-.surface-container-highest {
-  background-color: var(--color-surface-container-highest);
-}
-
-.surface-primary {
-  background: var(--gradient-primary);
-  color: var(--color-on-primary);
-}
-
-.surface-primary-container {
-  background-color: var(--color-primary-container);
-  color: var(--color-on-primary-container);
+.section-animate.is-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* ==========================================================================
@@ -127,7 +237,6 @@ p:last-child {
 .card {
   background-color: var(--color-surface-container-lowest);
   border-radius: var(--radius-default);
-  padding: var(--space-lg);
   transition: var(--transition-hover);
 }
 
@@ -137,30 +246,27 @@ p:last-child {
 }
 
 .card-image {
+  width: 100%;
+  height: 10rem;
   border-radius: var(--radius-default) var(--radius-default) 0 0;
-  aspect-ratio: 16 / 9;
 }
 
-/* Cause-category surface block colors */
-.card-image[data-cause="youth-education"]    { background: var(--color-cause-youth-education); }
-.card-image[data-cause="food-security"]      { background: var(--color-cause-food-security); }
-.card-image[data-cause="housing"]            { background: var(--color-cause-housing); }
-.card-image[data-cause="arts-culture"]       { background: var(--color-cause-arts-culture); }
-.card-image[data-cause="veterans"]           { background: var(--color-cause-veterans); }
-.card-image[data-cause="health-wellness"]    { background: var(--color-cause-health-wellness); }
-.card-image[data-cause="environment"]        { background: linear-gradient(135deg, var(--color-cause-environment-start), var(--color-cause-environment-end)); }
-.card-image[data-cause="animal-welfare"]     { background-color: var(--color-surface-container); box-shadow: inset 0 0 40px var(--color-cause-animal-welfare); }
-.card-image[data-cause="faith-based"]        { background: var(--color-cause-faith-based); }
-.card-image[data-cause="civic-community"]    { background: var(--color-cause-civic-community); }
+.card-image[data-cause="youth-education"] { background-color: var(--color-cause-youth-education); }
+.card-image[data-cause="food-security"] { background-color: var(--color-cause-food-security); }
+.card-image[data-cause="housing"] { background-color: var(--color-cause-housing); }
+.card-image[data-cause="arts-culture"] { background-color: var(--color-cause-arts-culture); }
+.card-image[data-cause="veterans"] { background-color: var(--color-cause-veterans); }
+.card-image[data-cause="health-wellness"] { background-color: var(--color-cause-health-wellness); }
+.card-image[data-cause="animal-welfare"] { background-color: var(--color-cause-animal-welfare); }
+.card-image[data-cause="faith-based"] { background-color: var(--color-cause-faith-based); }
+.card-image[data-cause="civic-community"] { background-color: var(--color-cause-civic-community); }
 
-.card-content {
-  padding: var(--space-lg) var(--space-lg) var(--space-md);
-}
+.card-content { padding: var(--space-lg); }
 
 .card-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-sm);
+  gap: var(--space-xs);
   margin-bottom: var(--space-sm);
 }
 
@@ -172,6 +278,7 @@ p:last-child {
 }
 
 .card-mission {
+  font-family: var(--font-body);
   font-size: var(--text-small);
   line-height: var(--leading-small);
   color: var(--color-text-muted);
@@ -179,9 +286,37 @@ p:last-child {
 }
 
 /* ==========================================================================
-   Button Styles
+   Buttons
    ========================================================================== */
 
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  background: var(--gradient-primary);
+  color: var(--color-on-primary);
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  font-weight: var(--weight-medium);
+  text-decoration: none;
+  border: none;
+  border-radius: var(--radius-default);
+  cursor: pointer;
+  transition: var(--transition-hover);
+  white-space: nowrap;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-ambient);
+  color: var(--color-on-primary);
+}
+
+.btn-primary--large {
+  padding: 1rem 2rem;
+  font-size: var(--text-body);
+}
 
 .btn-secondary {
   display: inline-flex;
@@ -189,253 +324,100 @@ p:last-child {
   justify-content: center;
   padding: 0.75rem 1.5rem;
   background: transparent;
-  color: var(--color-secondary-display);
+  color: var(--color-primary);
   font-family: var(--font-body);
   font-size: var(--text-small);
   font-weight: var(--weight-medium);
   text-decoration: none;
-  border-radius: var(--radius-sm);
-  transition: var(--transition-hover), outline-color var(--transition-fast);
-  outline: 1px solid transparent;
+  border: none;
+  border-radius: var(--radius-default);
+  cursor: pointer;
+  transition: color var(--transition-fast), background-color var(--transition-fast);
   white-space: nowrap;
 }
 
 .btn-secondary:hover {
-  transform: translateY(-2px);
-  outline-color: rgba(var(--color-outline-variant-rgb), 0.15);
-  color: var(--color-secondary-display);
+  background: var(--color-surface-container);
+  color: var(--color-primary);
 }
 
 .btn-secondary--light {
-  color: var(--color-on-primary);
-}
-
-.btn-secondary--light:hover {
-  color: var(--color-secondary-display);
-  outline-color: rgba(var(--color-on-primary-rgb), 0.15);
+  padding: 1rem 2rem;
+  font-size: var(--text-body);
 }
 
 .btn-card {
   display: inline-flex;
   align-items: center;
-  padding: 0.5rem 1rem;
-  background: var(--gradient-primary);
-  color: var(--color-on-primary);
-  font-family: var(--font-body);
-  font-size: var(--text-label);
-  font-weight: var(--weight-medium);
-  text-decoration: none;
-  border-radius: var(--radius-sm);
-  transition: var(--transition-hover);
-  white-space: nowrap;
-}
-
-.btn-card:hover {
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-ambient);
-  color: var(--color-on-primary);
-}
-
-/* ==========================================================================
-   Input / Form Styles
-   ========================================================================== */
-
-.form-group {
-  margin-bottom: var(--space-lg);
-}
-
-.form-label {
-  display: block;
   font-family: var(--font-body);
   font-size: var(--text-small);
   font-weight: var(--weight-medium);
-  color: var(--color-on-surface);
-  margin-bottom: var(--space-sm);
-}
-
-.form-input,
-.form-select,
-.form-textarea {
-  display: block;
-  width: 100%;
-  padding: 0.875rem var(--space-md);
-  background-color: var(--color-surface-container-highest);
-  color: var(--color-on-surface);
-  font-family: var(--font-body);
-  font-size: var(--text-body);
+  color: var(--color-secondary-display);
+  text-decoration: underline;
+  text-decoration-color: var(--color-secondary-display);
+  text-underline-offset: 0.15em;
+  background: none;
   border: none;
-  border-bottom: 2px solid transparent;
-  border-radius: var(--radius-default);
-  transition: border-color var(--transition-fast);
-}
-
-.form-input:focus,
-.form-select:focus,
-.form-textarea:focus {
-  border-bottom-color: var(--color-secondary);
-  outline: none;
-}
-
-.form-input::placeholder,
-.form-textarea::placeholder {
-  color: var(--color-text-lighter);
-}
-
-.form-select {
-  appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235a5c56' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right var(--space-md) center;
-  padding-right: var(--space-2xl);
   cursor: pointer;
+  transition: color var(--transition-fast);
 }
 
-.form-textarea {
-  min-height: 8rem;
-  resize: vertical;
-}
+.btn-card:hover { color: var(--color-secondary); }
 
 /* ==========================================================================
-   Pill / Tag Component
+   Tag / Pill
    ========================================================================== */
+
+.tag {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: var(--text-label);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-label);
+  padding: 0.25rem 0.625rem;
+  border-radius: var(--radius-default);
+  background-color: var(--color-surface-container);
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
 
 .pill {
   display: inline-flex;
   align-items: center;
-  padding: var(--space-xs) var(--space-sm);
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  font-weight: var(--weight-medium);
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-default);
   background-color: var(--color-surface-container-lowest);
   color: var(--color-on-surface);
-  font-family: var(--font-body);
-  font-size: var(--text-label);
-  font-weight: var(--weight-medium);
-  line-height: var(--leading-label);
-  letter-spacing: var(--tracking-label);
-  border-radius: var(--radius-default);
   text-decoration: none;
+  border: none;
+  cursor: pointer;
   transition: background-color var(--transition-fast), color var(--transition-fast);
   white-space: nowrap;
-  cursor: pointer;
 }
 
-.pill:hover {
-  background-color: var(--color-surface-container);
-  color: var(--color-on-surface);
-}
+.pill:hover { background-color: var(--color-surface-container); }
 
-.pill.is-active,
-.pill:active {
-  background-color: var(--color-secondary-display);
-  color: var(--color-on-surface);
-}
-
-.tag {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.125rem var(--space-sm);
-  background-color: var(--color-surface-container-low);
-  color: var(--color-text-muted);
-  font-family: var(--font-body);
-  font-size: var(--text-label);
-  font-weight: var(--weight-medium);
-  line-height: var(--leading-label);
-  letter-spacing: var(--tracking-label);
-  border-radius: var(--radius-default);
+.pill.is-active {
+  background-color: var(--color-primary);
+  color: var(--color-on-primary);
 }
 
 /* ==========================================================================
-   Section Spacing
-   ========================================================================== */
-
-.section {
-  padding-top: var(--space-3xl);
-  padding-bottom: var(--space-3xl);
-}
-
-.section--tight {
-  padding-top: var(--space-2xl);
-  padding-bottom: var(--space-2xl);
-}
-
-.section--flush-top {
-  padding-top: 0;
-}
-
-/* ==========================================================================
-   Section Animate (IntersectionObserver)
-   ========================================================================== */
-
-.section-animate {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 500ms ease, transform 500ms ease;
-}
-
-.section-animate.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* ==========================================================================
-   Hero Entrance Animation (Home page — CSS only)
-   ========================================================================== */
-
-.hero-animate-headline {
-  opacity: 0;
-  transform: translateY(24px);
-  animation: heroFadeUp 450ms ease forwards;
-}
-
-.hero-animate-subhead {
-  opacity: 0;
-  transform: translateY(24px);
-  animation: heroFadeUp 450ms ease 150ms forwards;
-}
-
-.hero-animate-ctas {
-  opacity: 0;
-  transform: translateY(24px);
-  animation: heroFadeUp 450ms ease 300ms forwards;
-}
-
-@keyframes heroFadeUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* ==========================================================================
-   Utility
+   Visually Hidden
    ========================================================================== */
 
 .visually-hidden {
   position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
 }
-
-/* ==========================================================================
-   Responsive
-   ========================================================================== */
-
-@media (min-width: 769px) {
-  .container {
-    padding-left: var(--space-xl);
-    padding-right: var(--space-xl);
-  }
-}
-
-/* === Home Page Styles === */
-
-/* ==========================================================================
-   index.css — Virginia Nonprofits Homepage
-   ========================================================================== */
 
 /* ==========================================================================
    Hero
@@ -455,7 +437,7 @@ p:last-child {
   margin: 0 auto;
 }
 
-.hero-headline {
+.hero .hero-headline {
   font-family: var(--font-display);
   font-size: var(--text-display);
   font-weight: var(--weight-bold);
@@ -467,7 +449,7 @@ p:last-child {
 
 .hero-subhead {
   font-family: var(--font-body);
-  font-size: var(--text-body);
+  font-size: 1.125rem;
   line-height: var(--leading-body);
   color: rgba(var(--color-on-primary-rgb), 0.8);
   margin-bottom: var(--space-xl);
@@ -483,18 +465,60 @@ p:last-child {
   align-items: center;
 }
 
+.hero-ctas a { text-decoration: none; }
+
+.hero .btn-primary--large {
+  background: var(--color-background);
+  color: var(--color-on-surface);
+}
+
+.hero .btn-primary--large:hover {
+  background: var(--color-surface-container-low);
+  color: var(--color-on-surface);
+  box-shadow: var(--shadow-ambient);
+}
+
+.hero .btn-secondary--light {
+  background: var(--color-background);
+  color: var(--color-on-surface);
+}
+
+.hero .btn-secondary--light:hover {
+  background: var(--color-surface-container-low);
+  color: var(--color-on-surface);
+  box-shadow: var(--shadow-ambient);
+}
+
 @media (min-width: 769px) {
   .hero {
     padding: calc(var(--space-3xl) + 5rem) 0 var(--space-3xl);
   }
 
-  .hero-subhead {
-    font-size: 1.125rem;
-  }
+  .hero-subhead { font-size: 1.375rem; }
 
   .hero-ctas {
     flex-direction: row;
     justify-content: center;
+  }
+}
+
+/* Hero Entrance Animations */
+.hero-animate-headline,
+.hero-animate-subhead,
+.hero-animate-ctas {
+  opacity: 0;
+  transform: translateY(1.5rem);
+  animation: heroFadeUp 700ms ease-out forwards;
+}
+
+.hero-animate-headline { animation-delay: 100ms; }
+.hero-animate-subhead { animation-delay: 300ms; }
+.hero-animate-ctas { animation-delay: 500ms; }
+
+@keyframes heroFadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
@@ -507,13 +531,8 @@ p:last-child {
   padding: var(--space-xl) 0;
 }
 
-.filter-group {
-  margin-bottom: var(--space-md);
-}
-
-.filter-group:last-child {
-  margin-bottom: 0;
-}
+.filter-group { margin-bottom: var(--space-md); }
+.filter-group:last-child { margin-bottom: 0; }
 
 .filter-label {
   display: block;
@@ -537,9 +556,7 @@ p:last-child {
   padding: var(--space-3xl) 0;
 }
 
-.featured-heading {
-  margin-bottom: var(--space-xl);
-}
+.featured-heading { margin-bottom: var(--space-xl); }
 
 .featured-grid-top {
   display: grid;
@@ -553,9 +570,7 @@ p:last-child {
   overflow: hidden;
 }
 
-.featured-card-lg .card-content {
-  padding: var(--space-lg);
-}
+.featured-card-lg .card-content { padding: var(--space-lg); }
 
 .featured-grid-bottom {
   display: grid;
@@ -563,26 +578,16 @@ p:last-child {
   gap: var(--space-xl);
 }
 
-.featured-card-sm {
-  padding: 0;
-}
-
-.featured-card-sm .card-content {
-  padding: var(--space-lg);
-}
+.featured-card-sm { padding: 0; }
+.featured-card-sm .card-content { padding: var(--space-lg); }
 
 @media (min-width: 769px) {
-  .featured-grid-top {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .featured-grid-bottom {
-    grid-template-columns: 1fr 1fr 1fr;
-  }
+  .featured-grid-top { grid-template-columns: 1fr 1fr; }
+  .featured-grid-bottom { grid-template-columns: 1fr 1fr 1fr; }
 }
 
 /* ==========================================================================
-   Nonprofit of the Month Inset — LAYOUT BOLDNESS TARGET
+   Nonprofit of the Month
    ========================================================================== */
 
 .nonprofit-of-month {
@@ -628,9 +633,7 @@ p:last-child {
   color: var(--color-on-primary-container);
 }
 
-.notm-quote {
-  margin-bottom: var(--space-lg);
-}
+.notm-quote { margin-bottom: var(--space-lg); }
 
 .notm-quote p {
   font-family: var(--font-body);
@@ -651,14 +654,10 @@ p:last-child {
   transition: color var(--transition-fast);
 }
 
-.notm-cta:hover {
-  color: var(--color-on-primary);
-}
+.notm-cta:hover { color: var(--color-on-primary); }
 
 @media (min-width: 769px) {
-  .nonprofit-of-month {
-    padding: var(--space-3xl) var(--space-xl);
-  }
+  .nonprofit-of-month { padding: var(--space-3xl) var(--space-xl); }
 }
 
 /* ==========================================================================
@@ -723,33 +722,9 @@ p:last-child {
   color: var(--color-text-muted);
 }
 
-.newsletter-form {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-md);
-}
-
-.newsletter-input {
-  flex: 1;
-}
-
-.newsletter-btn {
-  align-self: flex-start;
-}
-
 @media (min-width: 769px) {
   .newsletter-grid {
     grid-template-columns: 1fr 1fr;
     gap: var(--space-2xl);
-  }
-
-  .newsletter-form {
-    flex-direction: row;
-    align-items: flex-end;
-  }
-
-  .newsletter-btn {
-    align-self: auto;
-    flex-shrink: 0;
   }
 }

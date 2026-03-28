@@ -2,218 +2,12 @@
   File: header.html
   Page: Global
   Section: Self-contained header — paste into GHL Funnel Settings → Header Code
-  Last Updated: 2026-03-27
+  Last Updated: 2026-03-28
 -->
 
 <style>
 /* Google Fonts — Dual-Serif System */
 @import url('https://fonts.googleapis.com/css2?family=Newsreader:wght@400;500&family=Noto+Serif:wght@400;700&display=swap');
-
-/* ================================================================
-   Brand Tokens (shared by header, footer, and all pages)
-   ================================================================ */
-
-:root {
-  /* Colors */
-  --color-primary: #012d1d;
-  --color-primary-container: #1b4332;
-  --color-secondary: #755b00;
-  --color-secondary-display: #c9a84c;
-  --color-background: #fbf9f3;
-  --color-surface-container: #f0eee8;
-  --color-surface-container-low: #f6f3ed;
-  --color-surface-container-lowest: #ffffff;
-  --color-surface-container-highest: #e4e2dc;
-  --color-on-primary: #ffffff;
-  --color-on-primary-container: #86af99;
-  --color-on-surface: #1b1c18;
-  --color-outline-variant: #c1c8c2;
-
-  /* RGB Companions */
-  --color-primary-rgb: 1, 45, 29;
-  --color-primary-container-rgb: 27, 67, 50;
-  --color-secondary-rgb: 117, 91, 0;
-  --color-secondary-display-rgb: 201, 168, 76;
-  --color-background-rgb: 251, 249, 243;
-  --color-surface-container-rgb: 240, 238, 232;
-  --color-surface-container-low-rgb: 246, 243, 237;
-  --color-surface-container-lowest-rgb: 255, 255, 255;
-  --color-surface-container-highest-rgb: 228, 226, 220;
-  --color-on-primary-rgb: 255, 255, 255;
-  --color-on-primary-container-rgb: 134, 175, 153;
-  --color-on-surface-rgb: 27, 28, 24;
-  --color-outline-variant-rgb: 193, 200, 194;
-
-  /* Utility Colors */
-  --color-text-muted: #5a5c56;
-  --color-text-lighter: #7a7c76;
-  --color-border: rgba(193, 200, 194, 0.15);
-  --color-input-border: transparent;
-  --color-error: #b3261e;
-
-  /* Hero / Gradient */
-  --hero-gradient: linear-gradient(135deg, var(--color-primary), var(--color-primary-container));
-  --hero-scrim: rgba(1, 45, 29, 0.92);
-  --grain-opacity: 0.03;
-  --gradient-primary: linear-gradient(135deg, var(--color-primary), var(--color-primary-container));
-
-  /* Typography */
-  --font-display: 'Noto Serif', serif;
-  --font-body: 'Newsreader', serif;
-  --text-display: 2.25rem;
-  --text-h1: 2.25rem;
-  --text-h2: 1.5rem;
-  --text-h3: 1.25rem;
-  --text-body: 1rem;
-  --text-small: 0.875rem;
-  --text-label: 0.75rem;
-  --weight-regular: 400;
-  --weight-medium: 500;
-  --weight-bold: 700;
-  --leading-display: 1.1;
-  --leading-headline: 1.2;
-  --leading-title: 1.3;
-  --leading-body: 1.6;
-  --leading-small: 1.5;
-  --leading-label: 1.4;
-  --tracking-display: -0.02em;
-  --tracking-headline: -0.01em;
-  --tracking-label: 0.02em;
-  --tracking-normal: normal;
-
-  /* Spacing */
-  --space-xs: 0.25rem;
-  --space-sm: 0.5rem;
-  --space-md: 1rem;
-  --space-lg: 1.5rem;
-  --space-xl: 2rem;
-  --space-2xl: 3rem;
-  --space-3xl: 3rem;
-
-  /* Layout */
-  --container-max: 72rem;
-  --section-padding: var(--space-3xl);
-  --container-padding: var(--space-md);
-
-  /* Radius */
-  --radius-sm: 0.125rem;
-  --radius-default: 0.25rem;
-
-  /* Shadows */
-  --shadow-ambient: 0 4px 24px rgba(27, 28, 24, 0.04);
-  --shadow-none: none;
-
-  /* Transitions */
-  --transition-fast: 200ms ease-out;
-  --transition-base: 300ms ease-out;
-  --transition-hover: transform 200ms ease-out, box-shadow 200ms ease-out;
-
-  /* Z-Index */
-  --z-base: 0;
-  --z-card: 1;
-  --z-sticky: 100;
-  --z-nav: 200;
-  --z-overlay: 300;
-  --z-modal: 400;
-  --z-toast: 500;
-
-  /* Cause-Category Surface Block Colors */
-  --color-cause-youth-education: rgba(1, 45, 29, 0.15);
-  --color-cause-food-security: rgba(201, 168, 76, 0.12);
-  --color-cause-housing: rgba(27, 67, 50, 0.12);
-  --color-cause-arts-culture: rgba(117, 91, 0, 0.10);
-  --color-cause-veterans: rgba(1, 45, 29, 0.20);
-  --color-cause-health-wellness: rgba(134, 175, 153, 0.15);
-  --color-cause-environment-start: rgba(1, 45, 29, 0.10);
-  --color-cause-environment-end: rgba(27, 67, 50, 0.10);
-  --color-cause-animal-welfare: rgba(1, 45, 29, 0.03);
-  --color-cause-faith-based: rgba(201, 168, 76, 0.08);
-  --color-cause-civic-community: rgba(27, 67, 50, 0.10);
-}
-
-@media (min-width: 769px) {
-  :root {
-    --text-display: 3.5rem;
-    --text-h1: 3.5rem;
-    --text-h2: 2rem;
-    --text-h3: 1.25rem;
-    --space-3xl: 5rem;
-    --container-padding: var(--space-xl);
-  }
-}
-
-/* ================================================================
-   Reset
-   ================================================================ */
-
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-html {
-  -webkit-text-size-adjust: 100%;
-  scroll-behavior: smooth;
-}
-
-body {
-  font-family: var(--font-body);
-  font-size: var(--text-body);
-  font-weight: var(--weight-regular);
-  line-height: var(--leading-body);
-  color: var(--color-on-surface);
-  background-color: var(--color-background);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-img, video, svg {
-  display: block;
-  max-width: 100%;
-  height: auto;
-}
-
-a {
-  color: var(--color-primary);
-  text-decoration: underline;
-  text-decoration-color: var(--color-secondary-display);
-  text-underline-offset: 0.15em;
-  transition: color var(--transition-fast);
-}
-
-a:hover {
-  color: var(--color-primary-container);
-}
-
-ul, ol {
-  list-style: none;
-}
-
-button, input, select, textarea {
-  font: inherit;
-  color: inherit;
-  border: none;
-  background: none;
-  outline: none;
-}
-
-button {
-  cursor: pointer;
-}
-
-/* ================================================================
-   Container
-   ================================================================ */
-
-.container {
-  width: 100%;
-  max-width: var(--container-max);
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: var(--container-padding);
-  padding-right: var(--container-padding);
-}
 
 /* ================================================================
    Navigation
@@ -224,17 +18,22 @@ button {
   top: 0;
   left: 0;
   right: 0;
-  z-index: var(--z-nav);
-  padding: var(--space-md) 0;
-  transition: background-color var(--transition-base),
-              backdrop-filter var(--transition-base),
-              -webkit-backdrop-filter var(--transition-base);
+  z-index: 200;
+  padding: 0.5rem 0;
+  background-color: #fbf9f3;
+  transition: background-color 300ms ease-out;
 }
 
 .site-nav .container {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  width: 100%;
+  max-width: 72rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 .nav-logo {
@@ -247,78 +46,48 @@ button {
 .nav-links {
   display: none;
   align-items: center;
-  gap: var(--space-lg);
+  gap: 1.5rem;
 }
 
 .nav-links a {
-  font-family: var(--font-body);
-  font-size: var(--text-small);
-  font-weight: var(--weight-medium);
+  font-family: 'Newsreader', serif;
+  font-size: 1rem;
+  font-weight: 500;
   text-decoration: none;
-  color: var(--color-on-primary);
-  transition: color var(--transition-fast);
+  color: #1b1c18;
+  transition: color 200ms ease-out;
   white-space: nowrap;
 }
 
 .nav-links a:hover {
-  color: var(--color-secondary-display);
+  color: #c9a84c;
 }
 
 .nav-links a.active {
-  color: var(--color-secondary-display);
+  color: #c9a84c;
 }
 
+/* Nav CTA button */
 .nav-cta {
   display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, #012d1d, #1b4332);
+  color: #ffffff !important;
+  font-family: 'Newsreader', serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+  border-radius: 0.125rem;
+  transition: transform 200ms ease-out, box-shadow 200ms ease-out;
+  white-space: nowrap;
 }
 
-/* Scrolled state — glassmorphism */
-.site-nav.nav-scrolled {
-  background-color: rgba(var(--color-background-rgb), 0.85);
-  -webkit-backdrop-filter: blur(16px);
-  backdrop-filter: blur(16px);
-}
-
-.site-nav.nav-scrolled .nav-links a {
-  color: var(--color-on-surface);
-}
-
-.site-nav.nav-scrolled .nav-links a:hover,
-.site-nav.nav-scrolled .nav-links a.active {
-  color: var(--color-secondary-display);
-}
-
-/* Dark hero nav (home page) */
-.site-nav--dark .nav-links a {
-  color: var(--color-on-primary);
-}
-
-/* Light page nav (about, submit, directory) */
-.site-nav--light .nav-links a {
-  color: var(--color-on-surface);
-}
-
-.site-nav--light.nav-scrolled .nav-links a {
-  color: var(--color-on-surface);
-}
-
-/* Inner page — solid dark nav on load */
-.site-nav.nav--solid-start {
-  background-color: var(--color-primary);
-}
-
-.site-nav.nav--solid-start.nav-scrolled {
-  background-color: rgba(var(--color-background-rgb), 0.85);
-  -webkit-backdrop-filter: blur(16px);
-  backdrop-filter: blur(16px);
-}
-
-.site-nav.nav--solid-start.nav-scrolled .nav-links a {
-  color: var(--color-on-surface);
-}
-
-.site-nav.nav--solid-start.nav-scrolled .nav-hamburger span {
-  background-color: var(--color-on-surface);
+.nav-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 24px rgba(27, 28, 24, 0.04);
+  color: #ffffff !important;
 }
 
 /* Hamburger */
@@ -326,24 +95,19 @@ button {
   display: flex;
   flex-direction: column;
   gap: 5px;
-  padding: var(--space-xs);
+  padding: 0.25rem;
   background: none;
   border: none;
   cursor: pointer;
-  z-index: calc(var(--z-overlay) + 1);
+  z-index: 301;
 }
 
 .nav-hamburger span {
   display: block;
   width: 24px;
   height: 2px;
-  background-color: var(--color-on-primary);
-  transition: transform var(--transition-fast), opacity var(--transition-fast);
-}
-
-.site-nav.nav-scrolled .nav-hamburger span,
-.site-nav--light .nav-hamburger span {
-  background-color: var(--color-on-surface);
+  background-color: #1b1c18;
+  transition: transform 200ms ease-out, opacity 200ms ease-out;
 }
 
 .nav-hamburger.is-open span:nth-child(1) {
@@ -365,16 +129,16 @@ button {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: var(--color-primary);
-  z-index: var(--z-overlay);
+  background-color: #012d1d;
+  z-index: 300;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: var(--space-xl);
+  gap: 2rem;
   opacity: 0;
   pointer-events: none;
-  transition: opacity var(--transition-base);
+  transition: opacity 300ms ease-out;
 }
 
 .nav-overlay.is-open {
@@ -383,23 +147,47 @@ button {
 }
 
 .nav-overlay a {
-  font-family: var(--font-display);
-  font-size: var(--text-h2);
-  font-weight: var(--weight-bold);
-  color: var(--color-on-primary);
+  font-family: 'Noto Serif', serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ffffff;
   text-decoration: none;
-  transition: color var(--transition-fast);
+  transition: color 200ms ease-out;
 }
 
 .nav-overlay a:hover {
-  color: var(--color-secondary-display);
+  color: #c9a84c;
 }
 
-.nav-overlay .btn-primary {
-  margin-top: var(--space-md);
+/* Overlay CTA */
+.nav-overlay-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, #1b4332, #012d1d);
+  color: #ffffff;
+  font-family: 'Newsreader', serif;
+  font-size: 1rem;
+  font-weight: 500;
+  text-decoration: none;
+  border-radius: 0.125rem;
+  margin-top: 1rem;
+  transition: transform 200ms ease-out, box-shadow 200ms ease-out;
+}
+
+.nav-overlay-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 24px rgba(27, 28, 24, 0.04);
+  color: #ffffff;
 }
 
 @media (min-width: 769px) {
+  .site-nav .container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
   .nav-links {
     display: flex;
   }
@@ -418,37 +206,6 @@ button {
 }
 
 /* ================================================================
-   Button (nav CTA + mobile overlay CTA)
-   ================================================================ */
-
-.btn-primary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.75rem 1.5rem;
-  background: var(--gradient-primary);
-  color: var(--color-on-primary);
-  font-family: var(--font-body);
-  font-size: var(--text-small);
-  font-weight: var(--weight-medium);
-  text-decoration: none;
-  border-radius: var(--radius-sm);
-  transition: var(--transition-hover);
-  white-space: nowrap;
-}
-
-.btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-ambient);
-  color: var(--color-on-primary);
-}
-
-.btn-primary--large {
-  padding: 1rem 2rem;
-  font-size: var(--text-body);
-}
-
-/* ================================================================
    Skip Link
    ================================================================ */
 
@@ -462,9 +219,9 @@ button {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
-  top: var(--space-sm);
-  left: var(--space-md);
-  z-index: var(--z-toast);
+  top: 0.5rem;
+  left: 1rem;
+  z-index: 500;
   text-decoration: none;
 }
 
@@ -474,42 +231,27 @@ button {
   clip: auto;
   overflow: visible;
   margin: 0;
-  padding: var(--space-sm) var(--space-md);
-  background-color: var(--color-primary);
-  color: var(--color-on-primary);
-  font-family: var(--font-body);
-  font-size: var(--text-small);
-  border-radius: var(--radius-default);
-}
-
-/* ================================================================
-   Section Animate (entrance transitions — used on all pages)
-   ================================================================ */
-
-.section-animate {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 450ms ease-out, transform 450ms ease-out;
-}
-
-.section-animate.is-visible {
-  opacity: 1;
-  transform: translateY(0);
+  padding: 0.5rem 1rem;
+  background-color: #012d1d;
+  color: #ffffff;
+  font-family: 'Newsreader', serif;
+  font-size: 0.875rem;
+  border-radius: 0.25rem;
 }
 </style>
 
 <a href="#main-content" class="skip-link">Skip to main content</a>
 
-<header class="site-nav site-nav--dark" role="banner">
+<header class="site-nav" role="banner">
   <div class="container">
     <a href="/" aria-label="Virginia Nonprofits — Home">
-      <img src="https://assets.cdn.filesafe.space/3M40xtrRZZRWOmE1zFAN/media/69c697033204cc9b90315370.png" alt="Virginia Nonprofits" class="nav-logo">
+      <img src="https://assets.cdn.filesafe.space/3M40xtrRZZRWOmE1zFAN/media/69c7d9db3204cc0a454c7337.png" alt="Virginia Nonprofits" class="nav-logo">
     </a>
     <nav class="nav-links" aria-label="Primary navigation">
       <a href="/directory">Directory</a>
       <a href="/about">About</a>
       <a href="/submit">Submit a Nonprofit</a>
-      <a href="/submit" class="btn-primary nav-cta">Join the Directory</a>
+      <a href="/submit" class="nav-cta">Join the Directory</a>
     </nav>
     <button class="nav-hamburger" aria-label="Open menu" aria-expanded="false">
       <span></span>
@@ -520,25 +262,12 @@ button {
 </header>
 
 <script>
-/* ----------------------------------------------------------------
-   Header JS — runs immediately for nav elements already in DOM
-   ---------------------------------------------------------------- */
 (function () {
   'use strict';
 
   var hamburger = document.querySelector('.nav-hamburger');
   var nav = document.querySelector('.site-nav');
   var overlay = null;
-
-  /* Logo swap — light on dark bg, dark on scrolled cream bg */
-  var navLogo = document.querySelector('.nav-logo');
-  var lightLogoUrl = 'https://assets.cdn.filesafe.space/3M40xtrRZZRWOmE1zFAN/media/69c697033204cc9b90315370.png';
-  var darkLogoUrl = 'https://assets.cdn.filesafe.space/3M40xtrRZZRWOmE1zFAN/media/69c697032e89d8d6f14d7d6d.png';
-
-  function updateLogo() {
-    if (!navLogo || !nav) return;
-    navLogo.src = nav.classList.contains('nav-scrolled') ? darkLogoUrl : lightLogoUrl;
-  }
 
   function createOverlay() {
     overlay = document.createElement('div');
@@ -560,7 +289,7 @@ button {
 
     var cta = document.createElement('a');
     cta.href = '/submit';
-    cta.className = 'btn-primary btn-primary--large';
+    cta.className = 'nav-overlay-cta';
     cta.textContent = 'Join the Directory';
     overlay.appendChild(cta);
 
@@ -577,7 +306,7 @@ button {
 
     if (isOpen) {
       hamburger.querySelectorAll('span').forEach(function (span) {
-        span.style.backgroundColor = 'var(--color-on-primary)';
+        span.style.backgroundColor = '#ffffff';
       });
     } else {
       hamburger.querySelectorAll('span').forEach(function (span) {
@@ -590,76 +319,25 @@ button {
     hamburger.addEventListener('click', toggleNav);
   }
 
-  /* Glassmorphism Scroll Handler */
-  var scrollThreshold = 80;
+  /* Active Nav State */
+  function initActiveNav() {
+    var currentPath = window.location.pathname.replace(/\/$/, '');
+    var navAnchors = document.querySelectorAll('.nav-links a:not(.nav-cta)');
 
-  function handleScroll() {
-    if (!nav) return;
-    nav.classList.toggle('nav-scrolled', window.scrollY > scrollThreshold);
-    updateLogo();
+    navAnchors.forEach(function (a) {
+      var href = a.getAttribute('href');
+      if (!href) return;
+      var normalizedHref = href.replace(/\/$/, '');
+      if (currentPath === normalizedHref || (currentPath === '' && normalizedHref === '')) {
+        a.classList.add('active');
+      }
+    });
   }
 
-  window.addEventListener('scroll', handleScroll, { passive: true });
-  handleScroll();
-
-  /* Inner page — solid dark nav on load (not homepage) */
-  var isHomePage = (window.location.pathname === '/' || window.location.pathname === '');
-  if (!isHomePage && nav) {
-    nav.classList.add('nav--solid-start');
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initActiveNav);
+  } else {
+    initActiveNav();
   }
 })();
-
-/* ----------------------------------------------------------------
-   Deferred JS — waits for full DOM (page content + footer)
-   ---------------------------------------------------------------- */
-function initPageFeatures() {
-  'use strict';
-
-  /* IntersectionObserver — .section-animate */
-  var animatedSections = document.querySelectorAll('.section-animate');
-
-  if (animatedSections.length > 0 && 'IntersectionObserver' in window) {
-    var observer = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.15 });
-
-    animatedSections.forEach(function (el) {
-      observer.observe(el);
-    });
-  } else {
-    animatedSections.forEach(function (el) {
-      el.classList.add('is-visible');
-    });
-  }
-
-  /* Copyright Year */
-  var yearEl = document.getElementById('copyright-year');
-  if (yearEl) {
-    yearEl.textContent = new Date().getFullYear();
-  }
-
-  /* Active Nav State */
-  var currentPath = window.location.pathname.replace(/\/$/, '');
-  var navAnchors = document.querySelectorAll('.nav-links a:not(.btn-primary)');
-
-  navAnchors.forEach(function (a) {
-    var href = a.getAttribute('href');
-    if (!href) return;
-    var normalizedHref = href.replace(/\/$/, '');
-    if (currentPath === normalizedHref || (currentPath === '' && normalizedHref === '')) {
-      a.classList.add('active');
-    }
-  });
-}
-
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initPageFeatures);
-} else {
-  initPageFeatures();
-}
 </script>

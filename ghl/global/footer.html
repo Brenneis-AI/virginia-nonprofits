@@ -2,7 +2,7 @@
   File: footer.html
   Page: Global
   Section: Self-contained footer — paste into GHL Funnel Settings → Footer Code
-  Last Updated: 2026-03-27
+  Last Updated: 2026-03-28
 -->
 
 <style>
@@ -145,3 +145,10 @@
     </div>
   </div>
 </footer>
+
+<script>
+(function () {
+  var yearEl = document.getElementById('copyright-year');
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
+})();
+</script>
