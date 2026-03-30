@@ -1,0 +1,135 @@
+<!--
+  File: claim.html
+  Page: Claim Your Listing
+  Section: Full page body content — paste into GHL Claim step Custom HTML element
+  Last Updated: 2026-03-28
+-->
+
+<!-- Supabase JS Client (CDN) -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+
+<div class="vn-content">
+
+  <!-- ====== Page Header ====== -->
+  <section id="main-content" class="claim-header">
+    <div class="container">
+      <h1 class="claim-title">Claim Your Listing</h1>
+      <p class="claim-subhead" id="claim-subhead">
+        Take ownership of your organization's profile on Virginia Nonprofits.
+      </p>
+    </div>
+  </section>
+
+  <!-- ====== Form Section ====== -->
+  <section class="claim-form-section" aria-label="Claim form">
+    <div class="container">
+
+      <!-- Value Strip -->
+      <div class="claim-value-strip">
+        <div class="claim-value-item">
+          <span class="claim-value-label">Keep it current</span>
+          <p>Update your mission, website, and contact info anytime.</p>
+        </div>
+        <div class="claim-value-item">
+          <span class="claim-value-label">Get verified</span>
+          <p>A verified badge shows donors and volunteers your listing is active and maintained.</p>
+        </div>
+        <div class="claim-value-item">
+          <span class="claim-value-label">See your reach</span>
+          <p>Track how many people are finding your organization through the directory.</p>
+        </div>
+      </div>
+
+      <!-- Success State — hidden until form submits -->
+      <div class="claim-success" id="claim-success" style="display: none;">
+        <h2>Request received.</h2>
+        <p>We'll verify your information and be in touch within 1-2 business days. Once approved, you'll receive an email with instructions to access and update your listing.</p>
+        <a href="/directory" class="btn-primary">Back to Directory</a>
+      </div>
+
+      <!-- Form -->
+      <form class="claim-form" id="claim-form" novalidate>
+
+        <div class="form-group">
+          <label for="org-name" class="form-label">
+            Organization Name <span class="form-required" aria-hidden="true">*</span>
+          </label>
+          <input type="text" id="org-name" name="org_name"
+                 class="form-input" readonly
+                 aria-describedby="org-name-note">
+          <span id="org-name-note" class="form-note">
+            Pre-filled from the directory. <a href="/directory">Wrong org?</a>
+          </span>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="claimant-name" class="form-label">
+              Your Full Name <span class="form-required" aria-hidden="true">*</span>
+            </label>
+            <input type="text" id="claimant-name" name="claimant_name"
+                   class="form-input" placeholder="First and last name" required>
+          </div>
+          <div class="form-group">
+            <label for="claimant-title" class="form-label">
+              Your Title / Role <span class="form-required" aria-hidden="true">*</span>
+            </label>
+            <input type="text" id="claimant-title" name="claimant_title"
+                   class="form-input" placeholder="e.g. Executive Director" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="claimant-email" class="form-label">
+            Your Work Email <span class="form-required" aria-hidden="true">*</span>
+          </label>
+          <input type="email" id="claimant-email" name="claimant_email"
+                 class="form-input"
+                 placeholder="your@organization.org" required
+                 aria-describedby="email-note">
+          <span id="email-note" class="form-note">
+            Use your organization email if possible — it speeds up verification.
+          </span>
+        </div>
+
+        <div class="form-group">
+          <label for="claimant-source" class="form-label">
+            How did you hear about Virginia Nonprofits?
+          </label>
+          <select id="claimant-source" name="claimant_source" class="form-select">
+            <option value="" disabled selected>Select one</option>
+            <option value="cne-event">CNE Event</option>
+            <option value="cne-member">CNE Member Network</option>
+            <option value="valley-league">Valley Baseball League</option>
+            <option value="colleague">Colleague or peer org</option>
+            <option value="google">Google search</option>
+            <option value="social-media">Social media</option>
+            <option value="brenneis-ai">Brenneis AI</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <div class="form-group form-checkbox-group">
+          <label class="form-checkbox-label">
+            <input type="checkbox" id="confirm-affiliation" name="confirm_affiliation" required>
+            <span>I confirm that I am authorized to manage this organization's online presence.</span>
+          </label>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn-primary btn-primary--large claim-submit-btn"
+                  id="claim-submit">
+            Submit Claim Request
+          </button>
+        </div>
+
+        <p class="form-footer-note">
+          All claims are reviewed within 1-2 business days.
+          Questions? Email <a href="mailto:hello@virginianonprofits.org">hello@virginianonprofits.org</a>
+        </p>
+
+      </form>
+    </div>
+  </section>
+
+</div>

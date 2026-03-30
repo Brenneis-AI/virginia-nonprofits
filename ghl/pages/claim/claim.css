@@ -1,0 +1,464 @@
+/*
+  File: claim.css
+  Page: Claim Your Listing
+  Section: Self-contained styles — paste into GHL Claim step Custom CSS
+  Last Updated: 2026-03-28
+*/
+
+/* Google Fonts — Dual-Serif System */
+@import url('https://fonts.googleapis.com/css2?family=Newsreader:wght@400;500&family=Noto+Serif:wght@400;700&display=swap');
+
+/* ==========================================================================
+   Brand Tokens
+   ========================================================================== */
+
+:root {
+  /* Colors */
+  --color-primary: #012d1d;
+  --color-primary-container: #1b4332;
+  --color-secondary: #755b00;
+  --color-secondary-display: #c9a84c;
+  --color-background: #fbf9f3;
+  --color-surface-container: #f0eee8;
+  --color-surface-container-low: #f6f3ed;
+  --color-surface-container-lowest: #ffffff;
+  --color-on-primary: #ffffff;
+  --color-on-surface: #1b1c18;
+
+  /* Utility Colors */
+  --color-text-muted: #5a5c56;
+  --color-text-lighter: #7a7c76;
+
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, var(--color-primary), var(--color-primary-container));
+
+  /* Typography — Families */
+  --font-display: 'Noto Serif', serif;
+  --font-body: 'Newsreader', serif;
+
+  /* Typography — Sizes (mobile-first) */
+  --text-display: 2.25rem;
+  --text-h1: 2.25rem;
+  --text-h2: 1.5rem;
+  --text-h3: 1.25rem;
+  --text-body: 1rem;
+  --text-small: 0.875rem;
+  --text-label: 0.75rem;
+
+  /* Typography — Weights */
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-bold: 700;
+
+  /* Typography — Line Heights */
+  --leading-display: 1.1;
+  --leading-headline: 1.2;
+  --leading-body: 1.6;
+  --leading-small: 1.5;
+  --leading-label: 1.4;
+
+  /* Typography — Letter Spacing */
+  --tracking-display: -0.02em;
+  --tracking-label: 0.02em;
+
+  /* Spacing Scale */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 3rem;
+
+  /* Layout */
+  --container-max: 72rem;
+  --container-padding: var(--space-md);
+
+  /* Radius */
+  --radius-default: 0.25rem;
+
+  /* Shadows */
+  --shadow-ambient: 0 4px 24px rgba(27, 28, 24, 0.04);
+
+  /* Transitions */
+  --transition-fast: 200ms ease-out;
+  --transition-base: 300ms ease-out;
+  --transition-hover: transform 200ms ease-out, box-shadow 200ms ease-out;
+}
+
+@media (min-width: 769px) {
+  :root {
+    --text-display: 3.5rem;
+    --text-h1: 3.5rem;
+    --text-h2: 2rem;
+    --text-h3: 1.25rem;
+    --space-3xl: 5rem;
+    --container-padding: var(--space-xl);
+  }
+}
+
+/* ==========================================================================
+   Reset
+   ========================================================================== */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  color: var(--color-on-surface);
+  background-color: var(--color-background);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+
+/* ==========================================================================
+   Container
+   ========================================================================== */
+
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--container-padding);
+  padding-right: var(--container-padding);
+}
+
+/* ==========================================================================
+   Buttons
+   ========================================================================== */
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  background: var(--gradient-primary);
+  color: var(--color-on-primary);
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  font-weight: var(--weight-medium);
+  text-decoration: none;
+  border: none;
+  border-radius: var(--radius-default);
+  cursor: pointer;
+  transition: var(--transition-hover);
+  white-space: nowrap;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-ambient);
+  color: var(--color-on-primary);
+}
+
+.btn-primary--large {
+  padding: 1rem 2rem;
+  font-size: var(--text-body);
+}
+
+/* ==========================================================================
+   Page Header
+   ========================================================================== */
+
+.claim-header {
+  background: var(--gradient-primary);
+  padding: calc(var(--space-3xl) + 4rem) 0 var(--space-xl);
+  text-align: center;
+}
+
+.claim-title {
+  font-family: var(--font-display);
+  font-size: var(--text-display);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-display);
+  letter-spacing: var(--tracking-display);
+  color: var(--color-on-primary);
+  margin-bottom: var(--space-lg);
+}
+
+.claim-subhead {
+  font-family: var(--font-body);
+  font-size: 1.125rem;
+  line-height: var(--leading-body);
+  color: rgba(255, 255, 255, 0.8);
+  max-width: 36rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (min-width: 769px) {
+  .claim-subhead { font-size: 1.375rem; }
+}
+
+/* ==========================================================================
+   Form Section
+   ========================================================================== */
+
+.claim-form-section {
+  background-color: var(--color-surface-container-low);
+  padding: var(--space-3xl) 0 var(--space-3xl);
+}
+
+/* ==========================================================================
+   Value Strip
+   ========================================================================== */
+
+.claim-value-strip {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+  max-width: 40rem;
+  margin: 0 auto var(--space-3xl);
+}
+
+.claim-value-item {
+  background-color: var(--color-surface-container-lowest);
+  border-radius: var(--radius-default);
+  padding: var(--space-xl);
+}
+
+.claim-value-label {
+  display: block;
+  font-family: var(--font-display);
+  font-size: var(--text-body);
+  font-weight: var(--weight-bold);
+  color: var(--color-primary);
+  margin-bottom: var(--space-sm);
+}
+
+.claim-value-item p {
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+/* ==========================================================================
+   Form
+   ========================================================================== */
+
+.claim-form {
+  max-width: 40rem;
+  margin: 0 auto;
+  background-color: var(--color-surface-container-lowest);
+  border-radius: var(--radius-default);
+  padding: var(--space-xl) var(--space-xl) var(--space-2xl);
+}
+
+.form-group {
+  margin-bottom: var(--space-xl);
+}
+
+.form-label {
+  display: block;
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  font-weight: var(--weight-medium);
+  color: var(--color-on-surface);
+  margin-bottom: var(--space-sm);
+}
+
+.form-required {
+  color: var(--color-secondary-display);
+}
+
+.form-input {
+  width: 100%;
+  padding: 1rem 1.25rem;
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  color: var(--color-on-surface);
+  background-color: var(--color-surface-container-lowest);
+  border: 1px solid var(--color-surface-container);
+  border-radius: var(--radius-default);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--color-secondary-display);
+  box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.15);
+}
+
+.form-input::placeholder { color: var(--color-text-lighter); }
+
+.form-input[readonly] {
+  background-color: var(--color-surface-container-low);
+  color: var(--color-text-muted);
+  cursor: default;
+}
+
+.form-select {
+  width: 100%;
+  padding: 1rem 1.25rem;
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  color: var(--color-on-surface);
+  background-color: var(--color-surface-container-lowest);
+  border: 1px solid var(--color-surface-container);
+  border-radius: var(--radius-default);
+  cursor: pointer;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%235a5c56' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  padding-right: 2.5rem;
+}
+
+.form-select:focus {
+  outline: none;
+  border-color: var(--color-secondary-display);
+  box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.15);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+
+.form-note {
+  display: block;
+  font-size: var(--text-small);
+  color: var(--color-text-lighter);
+  margin-top: var(--space-sm);
+}
+
+.form-note a {
+  color: var(--color-secondary-display);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.form-note a:hover { color: var(--color-secondary); }
+
+/* Checkbox */
+.form-checkbox-group {
+  margin-top: var(--space-md);
+}
+
+.form-checkbox-label {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  color: var(--color-text-muted);
+  cursor: pointer;
+}
+
+.form-checkbox-label input[type="checkbox"] {
+  flex-shrink: 0;
+  margin-top: 0.25rem;
+  accent-color: var(--color-primary);
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+/* Actions */
+.form-actions {
+  margin-top: var(--space-xl);
+}
+
+.claim-submit-btn {
+  width: 100%;
+}
+
+.form-footer-note {
+  font-size: var(--text-small);
+  color: var(--color-text-lighter);
+  text-align: center;
+  margin-top: var(--space-xl);
+  margin-bottom: 0;
+}
+
+.form-footer-note a {
+  color: var(--color-secondary-display);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.form-footer-note a:hover { color: var(--color-secondary); }
+
+/* Validation error state */
+.form-input.is-invalid,
+.form-select.is-invalid {
+  border-color: #b3261e;
+  box-shadow: 0 0 0 3px rgba(179, 38, 30, 0.1);
+}
+
+.form-error {
+  display: none;
+  font-size: var(--text-label);
+  color: #b3261e;
+  margin-top: var(--space-xs);
+}
+
+.form-error.is-visible { display: block; }
+
+/* ==========================================================================
+   Success State
+   ========================================================================== */
+
+.claim-success {
+  max-width: 40rem;
+  margin: 0 auto;
+  background-color: var(--color-surface-container-lowest);
+  border-radius: var(--radius-default);
+  padding: var(--space-3xl) var(--space-2xl);
+  text-align: center;
+}
+
+.claim-success h2 {
+  font-family: var(--font-display);
+  font-size: var(--text-h2);
+  font-weight: var(--weight-bold);
+  margin-bottom: var(--space-md);
+  color: var(--color-primary);
+}
+
+.claim-success p {
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-xl);
+}
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+
+@media (min-width: 769px) {
+  .claim-value-strip {
+    grid-template-columns: 1fr 1fr 1fr;
+    max-width: 60rem;
+  }
+
+  .claim-value-item {
+    padding: var(--space-2xl);
+  }
+
+  .claim-form {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .form-row {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-lg);
+  }
+
+  .claim-submit-btn {
+    width: auto;
+  }
+
+  .form-actions {
+    display: flex;
+    justify-content: flex-end;
+  }
+}

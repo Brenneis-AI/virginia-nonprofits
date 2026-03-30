@@ -485,6 +485,38 @@ img { max-width: 100%; height: auto; display: block; }
 
 .listing-bookmark:hover { color: var(--color-secondary-display); }
 
+.listing-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.claim-link {
+  font-family: var(--font-body);
+  font-size: var(--text-label);
+  font-weight: var(--weight-medium);
+  color: var(--color-secondary-display);
+  text-decoration: underline;
+  text-decoration-color: var(--color-secondary-display);
+  text-underline-offset: 0.15em;
+  letter-spacing: var(--tracking-label);
+  transition: color var(--transition-fast);
+  white-space: nowrap;
+}
+
+.claim-link:hover { color: var(--color-secondary); }
+
+.verified-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-family: var(--font-body);
+  font-size: var(--text-label);
+  font-weight: var(--weight-medium);
+  color: var(--color-primary-container);
+  letter-spacing: var(--tracking-label);
+}
+
 .listing-card--expanded .listing-name { font-size: var(--text-h2); }
 
 .listing-card--expanded .listing-mission {

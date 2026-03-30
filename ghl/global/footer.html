@@ -7,13 +7,13 @@
 
 <style>
 /* ================================================================
-   Footer
+   Footer — fully self-contained, no page :root dependencies
    ================================================================ */
 
 .site-footer {
-  background-color: var(--color-primary);
-  color: var(--color-on-primary);
-  padding: var(--space-3xl) 0 var(--space-xl);
+  background-color: #012d1d;
+  color: #ffffff;
+  padding: 3rem 0 2rem;
   position: relative;
 }
 
@@ -25,7 +25,7 @@
   right: 0;
   bottom: 0;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-  opacity: var(--grain-opacity);
+  opacity: 0.03;
   pointer-events: none;
   z-index: 0;
 }
@@ -33,80 +33,95 @@
 .site-footer .container {
   position: relative;
   z-index: 1;
+  width: 100%;
+  max-width: 72rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 .footer-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--space-xl);
+  gap: 2rem;
 }
 
 .footer-col h4 {
-  font-family: var(--font-display);
-  font-size: var(--text-small);
-  font-weight: var(--weight-bold);
-  color: var(--color-on-primary);
-  margin-bottom: var(--space-md);
-  letter-spacing: var(--tracking-label);
+  font-family: 'Noto Serif', serif;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 1rem;
+  letter-spacing: 0.02em;
   text-transform: uppercase;
 }
 
 .footer-col p {
-  font-size: var(--text-small);
-  line-height: var(--leading-small);
-  color: rgba(var(--color-on-primary-rgb), 0.7);
-  margin-bottom: var(--space-sm);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 0.5rem;
 }
 
 .footer-col a {
-  color: var(--color-on-primary);
+  color: #ffffff;
   text-decoration: none;
-  font-size: var(--text-small);
-  line-height: var(--leading-small);
+  font-size: 0.875rem;
+  line-height: 1.5;
   display: block;
-  margin-bottom: var(--space-sm);
-  transition: color var(--transition-fast);
+  margin-bottom: 0.5rem;
+  transition: color 200ms ease-out;
 }
 
 .footer-col a:hover {
-  color: var(--color-secondary-display);
+  color: #c9a84c;
 }
 
 .footer-logo {
   height: 3rem;
   width: auto;
-  margin-bottom: var(--space-md);
+  margin-bottom: 1rem;
 }
 
 .footer-tagline {
-  font-family: var(--font-display);
-  font-size: var(--text-small);
-  font-weight: var(--weight-bold);
-  color: var(--color-on-primary);
-  margin-bottom: var(--space-sm);
+  font-family: 'Noto Serif', serif;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
 }
 
 .footer-bottom {
-  margin-top: var(--space-xl);
-  padding-top: var(--space-md);
+  margin-top: 2rem;
+  padding-top: 1rem;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  gap: var(--space-sm);
-  color: rgba(var(--color-on-primary-rgb), 0.5);
-  font-size: var(--text-label);
+  gap: 0.5rem;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.75rem;
 }
 
 .footer-bottom a {
-  color: var(--color-secondary-display);
-  font-size: var(--text-label);
+  color: #c9a84c;
+  font-size: 0.75rem;
 }
 
 @media (min-width: 769px) {
+  .site-footer {
+    padding: 5rem 0 2rem;
+  }
+
+  .site-footer .container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
   .footer-grid {
     grid-template-columns: 1.5fr 1fr 1fr 1fr;
-    gap: var(--space-2xl);
+    gap: 3rem;
   }
 }
 </style>

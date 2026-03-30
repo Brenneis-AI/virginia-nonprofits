@@ -145,6 +145,15 @@ function init() {
       websiteLink = '<a href="' + escapeAttr(item.website_url) + '" class="btn-card" target="_blank" rel="noopener noreferrer">Visit Website</a>';
     }
 
+    var claimBadge = '';
+    if (item.claimed) {
+      claimBadge = '<span class="verified-badge">' +
+        '<svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
+        'Verified</span>';
+    } else {
+      claimBadge = '<a href="/claim?org=' + escapeAttr(item.slug) + '&name=' + encodeURIComponent(item.name) + '" class="claim-link" aria-label="Claim listing for ' + escapeAttr(item.name) + '">Claim this listing</a>';
+    }
+
     return '<article class="listing-card' + expandedClass + '" data-region="' + escapeAttr(item.region) + '" data-cause="' + escapeAttr(item.cause_primary) + '">' +
       '<div class="listing-content">' +
         '<div class="card-tags">' +
@@ -155,9 +164,12 @@ function init() {
         '<p class="listing-mission">' + escapeHtml(item.mission_short || '') + '</p>' +
         '<div class="listing-actions">' +
           websiteLink +
-          '<button class="listing-bookmark" aria-label="Bookmark ' + escapeAttr(item.name) + '">' +
-            '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 2h10v13l-5-3.5L3 15V2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>' +
-          '</button>' +
+          '<div class="listing-meta">' +
+            claimBadge +
+            '<button class="listing-bookmark" aria-label="Bookmark ' + escapeAttr(item.name) + '">' +
+              '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 2h10v13l-5-3.5L3 15V2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>' +
+            '</button>' +
+          '</div>' +
         '</div>' +
       '</div>' +
     '</article>';
